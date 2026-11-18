@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Retro de criativos · Meta Ads · modelo com dados fictícios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f2f3ef; --surface:#fff; --ink:#1c2422; --ink-2:#4a5552; --ink-3:#6f7a76; --line:#dadfd8; --line-2:#e8ebe6;
+    --brand:#0f4c47; --brand-soft:#e3eeea;
+    --topo:#cf7224; --topo-soft:#fbeee2; --meio:#3767a8; --meio-soft:#e7eef8; --fundo:#2c855a; --fundo-soft:#e4f3ea;
+    --alert:#b93f2d; --alert-soft:#fbebe7; --context:#5f53a0; --context-soft:#eeecf8;
+    --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif; --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+    --r-lg:22px; --r-md:14px; --r-sm:8px;
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+  a{color:inherit} button{font:inherit;color:inherit}
+  :focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:6px}
+  .wrap{width:min(1240px,100% - 40px);margin-inline:auto}
+  .skip{position:fixed;left:16px;top:-60px;z-index:99;padding:10px 14px;border-radius:var(--r-sm);background:var(--brand);color:#fff}
+  .skip:focus{top:12px}
+
+  /* Cabeçalho */
+  .hero{padding:44px 0 34px}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:40px;align-items:end}
+  .brandline{display:flex;align-items:center;gap:10px;margin:0 0 26px;color:var(--ink-2);font-weight:600;font-size:15px}
+  .logo{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--brand);color:#fff;font:800 17px var(--display)}
+  .hero h1{margin:0;font:800 clamp(42px,6.4vw,84px)/.95 var(--display);letter-spacing:-.04em;font-variation-settings:"opsz" 96}
+  .hero .sub{max-width:52ch;margin:18px 0 0;color:var(--ink-2);font-size:18px}
+  .facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:8px 28px;margin:26px 0 0;padding:0}
+  .facts div{min-width:0} .facts dt{color:var(--ink-3);font-size:13px} .facts dd{margin:0;font-weight:700}
+  .demo-flag{display:inline-block;margin-top:22px;padding:6px 12px;border:1px dashed #b9a24a;border-radius:99px;background:#fbf5d9;color:#5e4d06;font-size:13px;font-weight:600}
+
+  .podium{position:relative;padding:22px;border-radius:var(--r-lg);background:var(--brand);color:#fff}
+  .podium h2{margin:0 0 14px;font:700 18px/1.3 var(--display);color:#fff}
+  .podium p.hint{margin:14px 0 0;color:#cfe2dc;font-size:13px}
+  .podium-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .pod{min-width:0;text-decoration:none}
+  .pod .frame{aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#0a3632}
+  .pod .frame svg,.pod .frame img{display:block;width:100%;height:100%;object-fit:cover}
+  .pod b{display:block;margin-top:8px;font:700 13px/1.3 var(--display)}
+  .pod span{display:block;color:#cfe2dc;font-size:12px;line-height:1.35}
+  .pod .stage-dot{display:inline-block;width:8px;height:8px;margin-right:6px;border-radius:50%;vertical-align:1px}
+
+  /* Navegação */
+  .bar{position:sticky;top:0;z-index:20;border-block:1px solid var(--line);background:rgb(242 243 239 / 92%);backdrop-filter:blur(12px)}
+  .bar .wrap{display:flex;align-items:center;gap:12px;padding:10px 0}
+  .tabs{display:flex;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none}
+  .tab{flex:0 0 auto;padding:9px 16px;border:1px solid var(--line);border-radius:99px;background:var(--surface);color:var(--ink-2);font-weight:600;font-size:14px;cursor:pointer}
+  .tab[aria-selected="true"]{border-color:var(--ink);background:var(--ink);color:#fff}
+  .print{flex:0 0 auto;margin-left:auto;padding:9px 16px;border:0;border-radius:99px;background:var(--brand);color:#fff;font-weight:700;font-size:14px;cursor:pointer}
+
+  main{padding:34px 0 70px}
+  .panel[hidden]{display:none}
+  .panel-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+  .panel-head h2{margin:0;font:800 clamp(30px,3.6vw,44px)/1.05 var(--display);letter-spacing:-.03em}
+  .panel-head p{margin:6px 0 0;color:var(--ink-2)}
+  .partial{padding:5px 11px;border-radius:99px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2);font-size:13px;font-weight:600}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;overflow:hidden;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--line)}
+  .kpi{padding:20px 22px;background:var(--surface)}
+  .kpi dt{color:var(--ink-2);font-size:14px}
+  .kpi dd{margin:4px 0 0;font:800 clamp(24px,2.6vw,32px)/1.1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .kpi small{display:block;margin-top:4px;color:var(--ink-3);font-size:13px}
+
+  /* Etapas do funil */
+  .stage{margin-top:34px}
+  .stage-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid var(--c)}
+  .stage-head h3{margin:0;font:800 24px/1.2 var(--display);color:var(--c)}
+  .stage-head p{margin:0;color:var(--ink-2);font-size:15px}
+  .stage-head .count{margin-left:auto;color:var(--ink-3);font-size:14px}
+  .stage.topo{--c:var(--topo);--cs:var(--topo-soft)} .stage.meio{--c:var(--meio);--cs:var(--meio-soft)} .stage.fundo{--c:var(--fundo);--cs:var(--fundo-soft)}
+  .stage.alert{--c:var(--alert);--cs:var(--alert-soft)}
+
+  .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .card{display:grid;grid-template-rows:auto auto auto auto 1fr;min-width:0;padding:14px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface)}
+  .media{position:relative;display:block;aspect-ratio:1/1;width:100%;overflow:hidden;border-radius:var(--r-md);background:var(--cs);text-decoration:none}
+  .media svg,.media img{display:block;width:100%;height:100%;object-fit:cover}
+  .media .open{position:absolute;right:10px;top:12px;padding:6px 10px;border-radius:99px;background:rgb(255 255 255 / 94%);color:var(--ink);font-size:13px;font-weight:700;box-shadow:0 2px 10px rgb(0 0 0 / 18%)}
+  .media.missing{display:grid;place-items:center;color:var(--ink-2);font-weight:600;cursor:default}
+  .media .rank{position:absolute;left:10px;top:10px;display:grid;place-items:center;min-width:40px;height:40px;padding:0 8px;border-radius:12px;background:var(--surface);color:var(--c);font:800 20px var(--display)}
+  .ident{margin-top:14px;min-height:76px}
+  .ident h4{margin:0;font:700 16px/1.3 var(--display);overflow-wrap:anywhere}
+  .ident h4 a{text-decoration:none} .ident h4 a:hover{text-decoration:underline}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chip{padding:2px 9px;border-radius:99px;background:var(--cs);color:var(--c);font-size:12px;font-weight:700}
+  .chip.neutral{background:var(--line-2);color:var(--ink-2)}
+  .chip.alert{background:var(--alert-soft);color:var(--alert)} .chip.context{background:var(--context-soft);color:var(--context)}
+  .result{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:12px;padding:12px 14px;border-radius:var(--r-md);background:var(--cs)}
+  .result strong{font:800 26px/1.1 var(--display);color:var(--c);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .result strong small{font:600 14px var(--body);letter-spacing:0}
+  .result span{color:var(--ink-2);font-size:14px;text-align:right}
+  .result span b{display:block;color:var(--ink);font-size:16px}
+  .card.is-context .result{--c:var(--context);--cs:var(--context-soft)}
+  .card.is-alert .result{--c:var(--alert);--cs:var(--alert-soft)}
+  .metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 8px;margin:12px 0 0;padding:12px 2px;border-bottom:1px solid var(--line-2)}
+  .metrics div{min-width:0} .metrics dt{color:var(--ink-3);font-size:12px;line-height:1.3} .metrics dd{margin:0;font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+  .notes{margin:12px 0 0;padding:0;list-style:none;color:var(--ink-2);font-size:14px;line-height:1.5}
+  .notes li+li{margin-top:8px}
+  .notes b{color:var(--ink)}
+
+  .rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
+  .rule{padding:20px;border-radius:var(--r-lg);background:var(--ink);color:#fff}
+  .rule strong{display:block;font:800 24px/1.15 var(--display)}
+  .rule span{display:block;margin-top:6px;color:#c9d1ce;font-size:15px}
+
+  details.method{margin-top:34px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface)}
+  details.method summary{padding:16px 20px;font-weight:700;cursor:pointer}
+  details.method div{padding:0 20px 18px;color:var(--ink-2);font-size:14px}
+  details.method p{margin:0 0 8px;max-width:90ch}
+
+  footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--ink-3);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer b{color:var(--ink)}
+
+  .toast{position:fixed;left:50%;bottom:24px;z-index:50;max-width:calc(100% - 32px);padding:12px 16px;border-radius:12px;background:var(--ink);color:#fff;font-size:14px;transform:translate(-50%,140%);transition:transform .25s ease}
+  .toast.show{transform:translate(-50%,0)}
+
+  @media (max-width:1060px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:860px){.hero-grid{grid-template-columns:1fr;gap:28px}.rules{grid-template-columns:1fr}}
+  @media (max-width:620px){
+    .wrap{width:min(1240px,100% - 24px)}
+    .hero{padding:28px 0 24px} .hero .sub{font-size:16px}
+    .facts{grid-template-columns:1fr 1fr}
+    .podium{padding:16px} .podium-row{gap:8px} .pod b{font-size:12px} .pod span{display:none}
+    .print{display:none}
+    .cards{grid-template-columns:1fr}
+    .ident{min-height:0}
+    .kpi{padding:16px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  @media print{
+    @page{size:A4;margin:12mm}
+    body{background:#fff;font-size:12px}
+    .bar,.toast,.skip{display:none!important}
+    .panel[hidden]{display:block!important}
+    .panel+.panel{break-before:page}
+    .card,.rule,.kpis{break-inside:avoid}
+    .cards{grid-template-columns:repeat(3,1fr)}
+    details.method{display:block} details.method>div{display:block}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="brandline"><span class="logo" aria-hidden="true" id="client-initial">F</span><span id="client-line"></span></p>
+      <h1 id="report-title">Retro de criativos</h1>
+      <p class="sub" id="report-sub"></p>
+      <dl class="facts" id="facts"></dl>
+      <span class="demo-flag" id="demo-flag" hidden>Modelo com dados fictícios</span>
+    </div>
+    <aside class="podium" aria-labelledby="podium-title">
+      <h2 id="podium-title">Quem puxou cada etapa</h2>
+      <div class="podium-row" id="podium"></div>
+      <p class="hint" id="podium-hint"></p>
+    </aside>
+  </div>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="tabs" role="tablist" aria-label="Contas do relatório" id="tabs"></div>
+    <button class="print" type="button" onclick="window.print()">Imprimir ou salvar PDF</button>
+  </div>
+</div>
+
+<main id="conteudo" class="wrap"></main>
+
+<footer>
+  <div class="wrap">
+    <span id="footer-left"></span>
+    <span>Feito por <b id="author"></b></span>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!--
+  DADOS DO RELATÓRIO
+  Este é o único bloco que muda a cada execução. Preencha com os números brutos da plataforma:
+  o template calcula CTR, CPL, taxa de VV50% e custo por VV50% sozinho, para nunca haver divergência.
+  Campos de cada criativo:
+    name, format (VID | IMG | CAR), url (link do post; null = "Post não localizado"),
+    thumb (URL ou data URI do frame; null = frame ilustrativo gerado), frameText (texto do frame ilustrativo),
+    badges [], spend, impressions, clicks, vv50 (topo/meio), results (fundo),
+    notes: {leitura, hook, teste} | {sinal, motivo, evitar} | {contexto, leitura, uso}
+-->
+<script type="application/json" id="report-data">
+{
+  "demo": true,
+  "author": "Raul Klahold · Growth e mídia paga",
+  "client": "Fôlego",
+  "clientDescription": "app de treino e bem-estar",
+  "title": "Retro de criativos",
+  "subtitle": "Quais anúncios mais seguraram atenção, quais geraram demanda e o que vale testar no próximo ciclo, etapa por etapa do funil.",
+  "periodLabel": "setembro de 2026",
+  "start": "2026-09-01",
+  "end": "2026-09-30",
+  "extractedAt": "2026-10-01",
+  "timezone": "America/Sao_Paulo",
+  "currency": "BRL",
+  "accounts": [
+    {
+      "id": "b2b",
+      "tab": "Fôlego Empresas",
+      "title": "Fôlego Empresas",
+      "audience": "B2B, benefício corporativo para RH",
+      "accountId": "act_0000000001",
+      "resultLabel": "leads",
+      "resultSingular": "lead",
+      "costLabel": "CPL",
+      "conversionEvent": "Lead_Empresas (formulário do site)",
+      "totals": {"spend": 24860.00, "impressions": 1912400, "clicks": 11860, "results": 312},
+      "stages": {
+        "topo": [
+          {"name":"AD 04 | VID | TOPO | Pausa de 7 minutos no escritório","format":"VID","url":"#exemplo","thumb":null,"frameText":"Seu time para 7 minutos. A tarde inteira rende mais.","badges":["Maior volume"],"spend":3420.00,"impressions":612300,"clicks":2140,"vv50":84210,
+           "notes":{"leitura":"Mostra o benefício pelo ponto de vista do gestor: uma pausa curta que devolve energia ao time sem tirar ninguém do trabalho.","hook":"Cena real de escritório com o cronômetro de 7 minutos já no primeiro segundo.","teste":"Manter a abertura com o cronômetro e testar a mesma cena em operação de fábrica e call center."}},
+          {"name":"AD 01 | VID | TOPO | O RH que mede tudo","format":"VID","url":"#exemplo","thumb":null,"frameText":"Você mede turnover. Mede a energia do time?","badges":["Melhor taxa"],"spend":1690.00,"impressions":268900,"clicks":1020,"vv50":41880,
+           "notes":{"leitura":"Provoca o RH com uma pergunta que ele não costuma responder e posiciona o app como indicador de bem-estar.","hook":"Pergunta direta em texto grande, sem marca nos primeiros segundos.","teste":"Trocar a pergunta por um dado do próprio setor do cliente e medir se a taxa de VV50% se mantém."}},
+          {"name":"AD 07 | VID | TOPO | Escritório sem cadeira","format":"VID","url":"#exemplo","thumb":null,"frameText":"E se a reunião de hoje fosse em pé?","badges":[],"spend":980.00,"impressions":151200,"clicks":610,"vv50":18350,
+           "notes":{"leitura":"Usa uma situação curiosa do dia a dia corporativo para falar de movimento sem parecer palestra.","hook":"Cena inesperada de reunião em pé, com legenda em forma de pergunta.","teste":"Gravar uma versão com um gestor conhecido do setor fazendo o convite para a câmera."}}
+        ],
+        "meio": [
+          {"name":"AD 02 | VID | MEIO | Case: 38% menos afastamentos","format":"VID","url":"#exemplo","thumb":null,"frameText":"38% menos afastamentos em 6 meses.","badges":["Prova concreta"],"spend":2310.00,"impressions":244800,"clicks":1880,"vv50":36940,
+           "notes":{"leitura":"Case com número, prazo e uma gestora de RH contando o que mudou na rotina da empresa.","hook":"Número grande na tela antes de qualquer explicação.","teste":"Fazer a mesma estrutura com outro indicador (absenteísmo ou NPS interno) e comparar retenção."}},
+          {"name":"AD 05 | VID | MEIO | Como funciona em 40 segundos","format":"VID","url":"#exemplo","thumb":null,"frameText":"Como funciona, em 40 segundos.","badges":[],"spend":1460.00,"impressions":139600,"clicks":1240,"vv50":22470,
+           "notes":{"leitura":"Explicação de produto direta, com tela do painel do RH e do app do colaborador lado a lado.","hook":"Promessa de duração curta logo na abertura.","teste":"Cortar uma versão de 20 segundos focada só no painel do RH."}},
+          {"name":"AD 09 | VID | MEIO | O que o financeiro pergunta","format":"VID","url":"#exemplo","thumb":null,"frameText":"\"Quanto isso custa por pessoa?\"","badges":[],"spend":1020.00,"impressions":98300,"clicks":690,"vv50":12910,
+           "notes":{"leitura":"Antecipa a objeção de custo, que normalmente aparece só na reunião comercial.","hook":"A pergunta do financeiro dita em voz alta, como se fosse uma reunião real.","teste":"Responder com o custo por colaborador na tela e levar para um formulário curto."}}
+        ],
+        "fundo": [
+          {"name":"AD 03 | VID | FUNDO | Diagnóstico grátis do seu time","format":"VID","url":"#exemplo","thumb":null,"frameText":"Diagnóstico grátis de bem-estar do seu time.","badges":["Maior volume"],"spend":7640.00,"impressions":288400,"clicks":2310,"results":118,
+           "notes":{"leitura":"Oferta de baixo compromisso: o RH recebe um diagnóstico antes de falar de contrato.","hook":"A palavra \"grátis\" junto de \"seu time\" no primeiro frame.","teste":"Mostrar um trecho real do relatório de diagnóstico para aumentar a confiança antes do clique."}},
+          {"name":"AD 06 | IMG | FUNDO | Planilha: custo do sedentarismo","format":"IMG","url":"#exemplo","thumb":null,"frameText":"Baixe a planilha: quanto o sedentarismo custa à sua empresa.","badges":["Melhor CPL"],"spend":4920.00,"impressions":176500,"clicks":1540,"results":74,
+           "notes":{"leitura":"Material útil por si só, que faz o RH calcular o problema antes de conhecer a solução.","hook":"Promessa de número personalizado: \"quanto custa à sua empresa\".","teste":"Testar a mesma oferta em formato de calculadora interativa na landing page."}},
+          {"name":"AD 11 | VID | FUNDO | Demo com especialista","format":"VID","url":"#exemplo","thumb":null,"frameText":"20 minutos com um especialista. Sem compromisso.","badges":[],"spend":3010.00,"impressions":92700,"clicks":720,"results":41,
+           "notes":{"leitura":"Convite direto para uma conversa, com rosto do especialista e duração clara.","hook":"Duração da conversa e \"sem compromisso\" reduzem a barreira de agendar.","teste":"Incluir a agenda de horários direto no formulário e medir taxa de agendamento."}}
+        ]
+      },
+      "worst": [
+        {"stage":"topo","kind":"alert","name":"AD 08 | VID | TOPO | Institucional Fôlego 2026","format":"VID","url":"#exemplo","thumb":null,"frameText":"Fôlego. Bem-estar que transforma.","badges":["Baixa retenção"],"spend":2180.00,"impressions":402600,"clicks":290,"vv50":1240,
+         "notes":{"sinal":"Teve muita entrega, mas só 0,31% das impressões chegaram à metade do vídeo.","motivo":"A abertura mostra logo e slogan antes de qualquer dor ou situação que o RH reconheça.","evitar":"Começar pelo institucional. Primeiro a situação do dia a dia, depois a marca."}},
+        {"stage":"meio","kind":"alert","name":"AD 10 | VID | MEIO | Depoimento genérico","format":"VID","url":"#exemplo","thumb":null,"frameText":"\"A Fôlego mudou nossa cultura.\"","badges":["Mensagem abstrata"],"spend":520.00,"impressions":38400,"clicks":96,"vv50":1030,
+         "notes":{"sinal":"Retenção baixa mesmo com mais de 38 mil impressões.","motivo":"\"Mudou nossa cultura\" é amplo demais; não há número, prazo nem exemplo concreto.","evitar":"Depoimento sem resultado verificável. Preferir problema, solução, número e prova visual."}},
+        {"stage":"fundo","kind":"alert","name":"AD 12 | IMG | FUNDO | 6 benefícios + CTA","format":"IMG","url":"#exemplo","thumb":null,"frameText":"Saúde, energia, foco, clima, retenção e economia.","badges":["CPL elevado"],"spend":1140.00,"impressions":21300,"clicks":84,"results":6,
+         "notes":{"sinal":"Maior CPL entre as peças de fundo com investimento mínimo para comparação.","motivo":"Empilha seis benefícios sem desenvolver nenhum; o leitor não sabe qual é a promessa principal.","evitar":"Excesso de benefícios no mesmo anúncio. Uma promessa, uma prova e um próximo passo."}}
+      ]
+    },
+    {
+      "id": "b2c",
+      "tab": "Fôlego App",
+      "title": "Fôlego App",
+      "audience": "B2C, assinantes do app",
+      "accountId": "act_0000000002",
+      "resultLabel": "cadastros",
+      "resultSingular": "cadastro",
+      "costLabel": "CPA",
+      "conversionEvent": "CompleteRegistration (teste grátis)",
+      "totals": {"spend": 31420.00, "impressions": 3846000, "clicks": 52300, "results": 6184},
+      "stages": {
+        "topo": [
+          {"name":"AD 01 | VID | TOPO | Treino que cabe no intervalo","format":"VID","url":"#exemplo","thumb":null,"frameText":"15 minutos. No intervalo do almoço.","badges":["Maior volume"],"spend":4980.00,"impressions":905700,"clicks":9120,"vv50":212400,
+           "notes":{"leitura":"Resolve a objeção de falta de tempo com um treino que acontece dentro da rotina de trabalho.","hook":"Relógio marcando 12h05 e a pessoa começando o treino ainda de roupa social.","teste":"Fazer versões com outros momentos do dia: antes do café, pós-expediente e com criança dormindo."}},
+          {"name":"AD 03 | VID | TOPO | Eu odiava academia","format":"VID","url":"#exemplo","thumb":null,"frameText":"Eu odiava academia. Aí descobri isso.","badges":["Melhor taxa"],"spend":2050.00,"impressions":318400,"clicks":4010,"vv50":96310,
+           "notes":{"leitura":"Confissão em primeira pessoa que gera identificação com quem nunca gostou de treinar.","hook":"Frase de rejeição forte antes de apresentar a alternativa.","teste":"Repetir o formato com outras confissões: \"nunca tive disciplina\" e \"tenho vergonha de treinar\"."}},
+          {"name":"AD 05 | VID | TOPO | 3 erros de quem volta a treinar","format":"VID","url":"#exemplo","thumb":null,"frameText":"3 erros de quem volta a treinar.","badges":[],"spend":1470.00,"impressions":226900,"clicks":2680,"vv50":54880,
+           "notes":{"leitura":"Conteúdo educativo em lista, fácil de acompanhar até o fim.","hook":"Promessa numerada logo no início, que segura até o terceiro item.","teste":"Transformar cada erro em um vídeo próprio e ver qual tema puxa mais retenção."}}
+        ],
+        "meio": [
+          {"name":"AD 02 | VID | MEIO | Posso treinar com dor no joelho?","format":"VID","url":"#exemplo","thumb":null,"frameText":"Posso treinar com dor no joelho?","badges":["Maior volume"],"spend":3260.00,"impressions":402300,"clicks":6940,"vv50":148600,
+           "notes":{"leitura":"Responde uma dúvida real e frequente com uma fisioterapeuta, o que passa segurança.","hook":"A própria pergunta como abertura, dita por quem tem a dor.","teste":"Expandir para uma série de dúvidas: lombar, ombro, pós-parto e retorno após lesão."}},
+          {"name":"AD 04 | VID | MEIO | Quanto tempo até ver resultado?","format":"VID","url":"#exemplo","thumb":null,"frameText":"Quanto tempo até ver resultado?","badges":[],"spend":1780.00,"impressions":211500,"clicks":3110,"vv50":61720,
+           "notes":{"leitura":"Ajusta expectativa com honestidade, falando em semanas e não em dias.","hook":"Pergunta que todo iniciante faz, sem promessa milagrosa.","teste":"Mostrar a linha do tempo de uma aluna real com marcos de 2, 4 e 8 semanas."}},
+          {"name":"AD 07 | VID | MEIO | Bastidores da gravação dos treinos","format":"VID","url":"#exemplo","thumb":null,"frameText":"Bastidores: como gravamos cada treino.","badges":[],"spend":1120.00,"impressions":129800,"clicks":1540,"vv50":27940,
+           "notes":{"leitura":"Mostra o cuidado por trás do produto e humaniza os instrutores.","hook":"Câmera de bastidor, com erro de gravação real nos primeiros segundos.","teste":"Fechar o bastidor com um convite para fazer o treino que estava sendo gravado."}}
+        ],
+        "fundo": [
+          {"name":"AD 06 | VID | FUNDO | 7 dias grátis, sem cartão","format":"VID","url":"#exemplo","thumb":null,"frameText":"7 dias grátis. Sem cartão de crédito.","badges":["Maior volume"],"spend":7920.00,"impressions":612400,"clicks":11300,"results":1842,
+           "notes":{"leitura":"Oferta clara e sem risco: o principal medo (cobrança) é resolvido na própria frase.","hook":"\"Sem cartão\" em destaque, antes do nome do app.","teste":"Testar \"14 dias grátis\" contra \"7 dias\" e medir conversão em assinatura, não só cadastro."}},
+          {"name":"AD 09 | VID | FUNDO | Plano montado em 2 minutos","format":"VID","url":"#exemplo","thumb":null,"frameText":"Responda 5 perguntas. Seu plano fica pronto.","badges":[],"spend":6110.00,"impressions":498200,"clicks":8240,"results":1296,
+           "notes":{"leitura":"Mostra o onboarding do app como algo rápido e personalizado.","hook":"Tela do quiz aparecendo logo na abertura.","teste":"Levar o quiz para o anúncio (formato instantâneo) e comparar CPA com a landing page."}},
+          {"name":"AD 11 | IMG | FUNDO | Antes e depois em 30 dias","format":"IMG","url":"#exemplo","thumb":null,"frameText":"30 dias de treino em casa. A rotina da Bia.","badges":[],"spend":4690.00,"impressions":371600,"clicks":6020,"results":904,
+           "notes":{"leitura":"Transformação de rotina, não de corpo: o foco é constância e disposição.","hook":"Rosto e nome da aluna, com o período de 30 dias bem visível.","teste":"Fazer carrossel com o diário dos 30 dias, um cartão por semana."}}
+        ]
+      },
+      "worst": [
+        {"stage":"topo","kind":"alert","name":"AD 08 | VID | TOPO | Manifesto da marca","format":"VID","url":"#exemplo","thumb":null,"frameText":"Para todos que querem se mover.","badges":["Retenção abaixo dos pares"],"spend":1310.00,"impressions":186300,"clicks":640,"vv50":8940,
+         "notes":{"sinal":"Taxa de VV50% de 4,80%, bem abaixo das outras peças de topo com volume parecido.","motivo":"O manifesto demora para mostrar uma pessoa real e um benefício concreto.","evitar":"Guardar o benefício para o fim. Rotina real e ganho principal nos primeiros segundos."}},
+        {"stage":"fundo","kind":"context","name":"AD 12 | VID | FUNDO | Treino para gestantes","format":"VID","url":"#exemplo","thumb":null,"frameText":"Treino seguro na gestação, com fisioterapeuta.","badges":["Contexto específico"],"spend":2108.00,"impressions":141200,"clicks":1630,"results":214,
+         "notes":{"contexto":"Fala com um público bem menor (gestantes), então o custo por cadastro tende a ser maior.","leitura":"O CPA não deve ser comparado diretamente com os anúncios amplos; a diferença vem do recorte, não necessariamente do criativo.","uso":"Comparar com outras peças do mesmo recorte e acompanhar a conversão em assinatura desses cadastros."}},
+        {"stage":"fundo","kind":"context","name":"AD 13 | VID | FUNDO | Treino 60+","format":"VID","url":"#exemplo","thumb":null,"frameText":"Depois dos 60, força é independência.","badges":["Contexto específico"],"spend":1535.00,"impressions":118400,"clicks":1210,"results":176,
+         "notes":{"contexto":"Público 60+ é menor e mais caro de alcançar no Meta, o que pressiona o CPA.","leitura":"Custo acima dos amplos não prova criativo pior; vale olhar retenção dessas pessoas no app.","uso":"Manter como linha própria, com meta de CPA separada, e testar variações dentro do mesmo recorte."}}
+      ]
+    }
+  ],
+  "rules": [
+    {"big":"Uma promessa","small":"por anúncio, com uma prova que sustente"},
+    {"big":"2 segundos","small":"para mostrar por que aquilo importa para quem assiste"},
+    {"big":"Mesma promessa","small":"do anúncio até o formulário ou a loja do app"}
+  ]
+}
+</script>
+
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById('report-data').textContent);
+  const STAGES = {
+    topo: {label: 'Topo de funil', desc: 'Descoberta e atenção', color: 'var(--topo)', hex: '#cf7224'},
+    meio: {label: 'Meio de funil', desc: 'Consideração e prova', color: 'var(--meio)', hex: '#3767a8'},
+    fundo: {label: 'Fundo de funil', desc: 'Conversão e geração de demanda', color: 'var(--fundo)', hex: '#2c855a'}
+  };
+
+  /* Formatação brasileira, no máximo duas casas */
+  const int = n => Math.round(n).toLocaleString('pt-BR');
+  const money = n => n.toLocaleString('pt-BR', {style: 'currency', currency: D.currency || 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const pct = n => n.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '%';
+  const compact = n => n >= 1000 ? (n / 1000).toLocaleString('pt-BR', {maximumFractionDigits: 1}) + ' mil' : int(n);
+  const date = s => { const [y, m, d] = s.split('-'); return `${d}/${m}/${y}`; };
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  const safe = (a, b) => b ? a / b : 0;
+
+  /* Frame ilustrativo: usado só quando não há thumb real (modelo ou post sem imagem) */
+  const TONES = [['#2b3a37', '#6f8f86'], ['#3b2f2a', '#b08a6e'], ['#24324a', '#7d93b8'], ['#33392a', '#9aa36f'], ['#3a2b38', '#a87d9e'], ['#2a3838', '#79a6a3']];
+  function wrapText(text, max) {
+    const words = text.split(' '), lines = []; let line = '';
+    words.forEach(w => { if ((line + ' ' + w).trim().length > max && line) { lines.push(line); line = w; } else line = (line + ' ' + w).trim(); });
+    if (line) lines.push(line);
+    return lines.slice(0, 4);
+  }
+  function frameSVG(c, seed, accent) {
+    const [a, b] = TONES[seed % TONES.length];
+    const lines = wrapText(c.frameText || c.name, 26).slice(0, 3);
+    const lh = 28, boxH = lines.length * lh + 24, boxY = 380 - boxH;
+    const id = 'g' + seed + Math.random().toString(36).slice(2, 7);
+    const sx = 120 + (seed * 47) % 160;
+    const person = `<circle cx="${sx}" cy="130" r="40" fill="#f1e3d3" opacity=".92"/><path d="M${sx - 84} 400 C ${sx - 78} 196, ${sx + 78} 196, ${sx + 84} 400 Z" fill="${accent}" opacity=".9"/>`;
+        const text = lines.map((l, i) => `<text x="40" y="${boxY + 32 + i * lh}" font-family="Bricolage Grotesque,Segoe UI,sans-serif" font-size="22" font-weight="700" fill="#1c2422">${esc(l)}</text>`).join('');
+    return `<svg viewBox="0 0 400 400" role="img" aria-label="Frame ilustrativo: ${esc(c.frameText || c.name)}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${b}"/><stop offset="1" stop-color="${a}"/></linearGradient></defs>
+      <rect width="400" height="400" fill="url(#${id})"/>
+      <circle cx="${330 - (seed * 31) % 120}" cy="${90 + (seed * 23) % 60}" r="110" fill="#fff" opacity=".08"/>
+      ${person}
+      <rect x="22" y="${boxY}" width="356" height="${boxH}" rx="14" fill="#fff" opacity=".95"/>${text}
+    </svg>`;
+  }
+
+  function media(c, rank, seed, stageKey) {
+    const accent = STAGES[stageKey].hex;
+    const img = c.thumb ? `<img src="${esc(c.thumb)}" alt="Frame do anúncio ${esc(c.name)}" loading="lazy">` : frameSVG(c, seed, accent);
+    const rankEl = rank ? `<span class="rank" aria-label="Posição ${rank}">${rank}</span>` : '';
+    if (!c.url) return `<div class="media missing">${rankEl}Post não localizado</div>`;
+    return `<a class="media" href="${esc(c.url)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir anúncio: ${esc(c.name)}">${img}${rankEl}<span class="open">Abrir anúncio ↗</span></a>`;
+  }
+
+  /* Todas as métricas derivadas são calculadas aqui, a partir dos números brutos */
+  function derive(c, stage) {
+    const m = {ctr: safe(c.clicks, c.impressions) * 100};
+    if (stage === 'fundo') { m.cost = safe(c.spend, c.results); }
+    else { m.vvRate = safe(c.vv50, c.impressions) * 100; m.costVV = safe(c.spend, c.vv50); }
+    return m;
+  }
+
+  function card(c, i, stage, acc, mode) {
+    const m = derive(c, stage);
+    const isFundo = stage === 'fundo';
+    const kindClass = mode === 'worst' ? (c.kind === 'context' ? ' is-context' : ' is-alert') : '';
+    const chips = [`<span class="chip">${STAGES[stage].label.replace(' de funil', '')}</span>`, `<span class="chip neutral">${c.format === 'VID' ? 'Vídeo' : c.format === 'CAR' ? 'Carrossel' : 'Imagem'}</span>`]
+      .concat((c.badges || []).map(b => `<span class="chip ${mode === 'worst' ? (c.kind === 'context' ? 'context' : 'alert') : 'neutral'}">${esc(b)}</span>`)).join('');
+    const result = isFundo
+      ? `<strong>${int(c.results)} <small>${c.results === 1 ? acc.resultSingular : acc.resultLabel}</small></strong><span>${acc.costLabel}<b>${money(m.cost)}</b></span>`
+      : mode === 'worst'
+        ? `<strong>${pct(m.vvRate)} <small>de VV50%</small></strong><span>${int(c.vv50)} views 50%<b>${money(m.costVV)} por view</b></span>`
+        : `<strong>${compact(c.vv50)} <small>views 50%</small></strong><span>taxa de ${pct(m.vvRate)}<b>${money(m.costVV)} por view</b></span>`;
+    const rows = [
+      ['Investimento', money(c.spend)], ['Impressões', int(c.impressions)], ['Cliques no link', int(c.clicks)], ['CTR de link', pct(m.ctr)],
+      isFundo ? [cap(acc.resultLabel), int(c.results)] : ['Views 50%', int(c.vv50)],
+      isFundo ? [acc.costLabel, money(m.cost)] : ['Custo por VV50%', money(m.costVV)]
+    ];
+    const n = c.notes || {};
+    const notes = mode === 'worst'
+      ? (c.kind === 'context'
+        ? [['Contexto', n.contexto], ['Leitura correta', n.leitura], ['Como usar', n.uso]]
+        : [['Sinal', n.sinal], ['Possível motivo', n.motivo], ['Evitar', n.evitar]])
+      : [['Leitura', n.leitura], ['Hook', n.hook], ['Próximo teste', n.teste]];
+    const title = c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener noreferrer">${esc(c.name)}</a>` : esc(c.name);
+    return `<article class="card${kindClass}">
+      ${media(c, mode === 'worst' ? null : i + 1, i + (acc.id === 'b2c' ? 3 : 0) + stage.length, stage)}
+      <div class="ident"><h4>${title}</h4><div class="chips">${chips}</div></div>
+      <div class="result">${result}</div>
+      <dl class="metrics">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
+      <ul class="notes">${notes.map(([k, v]) => `<li><b>${k}:</b> ${esc(v || 'Sem informação suficiente para esta leitura.')}</li>`).join('')}</ul>
+    </article>`;
+  }
+  const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  function kpis(acc) {
+    const t = acc.totals;
+    return `<dl class="kpis">
+      <div class="kpi"><dt>${cap(acc.resultLabel)}</dt><dd>${int(t.results)}</dd><small>${esc(acc.conversionEvent)}</small></div>
+      <div class="kpi"><dt>Investimento</dt><dd>${money(t.spend)}</dd><small>${compact(t.impressions)} impressões</small></div>
+      <div class="kpi"><dt>${acc.costLabel} médio</dt><dd>${money(safe(t.spend, t.results))}</dd><small>investimento ÷ ${acc.resultLabel}</small></div>
+      <div class="kpi"><dt>CTR de link</dt><dd>${pct(safe(t.clicks, t.impressions) * 100)}</dd><small>${int(t.clicks)} cliques no link</small></div>
+    </dl>`;
+  }
+
+  function accountPanel(acc) {
+    const stages = Object.keys(STAGES).map(s => {
+      const list = (acc.stages[s] || []);
+      const body = list.length ? `<div class="cards">${list.map((c, i) => card(c, i, s, acc, 'win')).join('')}</div>` : `<p>Nenhum criativo classificado nesta etapa no período.</p>`;
+      const metric = s === 'fundo' ? `ranking por ${acc.resultLabel} (${esc(acc.conversionEvent)})` : 'ranking por views de 50% do vídeo';
+      return `<section class="stage ${s}" aria-labelledby="h-${acc.id}-${s}"><div class="stage-head"><h3 id="h-${acc.id}-${s}">${STAGES[s].label}</h3><p>${STAGES[s].desc}, ${metric}</p><span class="count">Top ${list.length}</span></div>${body}</section>`;
+    }).join('');
+    return `<section class="panel" id="panel-${acc.id}" role="tabpanel" aria-labelledby="tab-${acc.id}">
+      <div class="panel-head"><div><h2>${esc(acc.title)}</h2><p>${esc(acc.audience)}</p></div><span class="partial">${date(D.start)} a ${date(D.end)}</span></div>
+      ${kpis(acc)}${stages}${methodology(acc)}
+    </section>`;
+  }
+
+  function worstPanel() {
+    const groups = D.accounts.map(acc => {
+      const list = acc.worst || [];
+      const alerts = list.filter(c => c.kind !== 'context').length, ctx = list.length - alerts;
+      const label = [alerts && `${alerts} ${alerts === 1 ? 'alerta' : 'alertas'}`, ctx && `${ctx} ${ctx === 1 ? 'caso' : 'casos'} de contexto específico`].filter(Boolean).join(' e ');
+      return `<section class="stage alert"><div class="stage-head"><h3>${esc(acc.title)}</h3><p>${label}</p></div><div class="cards">${list.map((c, i) => card(c, i, c.stage, acc, 'worst')).join('')}</div></section>`;
+    }).join('');
+    const rules = (D.rules || []).map(r => `<div class="rule"><strong>${esc(r.big)}</strong><span>${esc(r.small)}</span></div>`).join('');
+    return `<section class="panel" id="panel-worst" role="tabpanel" aria-labelledby="tab-worst">
+      <div class="panel-head"><div><h2>O que evitar no próximo ciclo</h2><p>Só entram peças com entrega suficiente para comparar com outras da mesma etapa.</p></div></div>
+      ${groups}<div class="rules">${rules}</div>
+    </section>`;
+  }
+
+  function methodology(acc) {
+    return `<details class="method"><summary>Fonte e critérios desta conta</summary><div>
+      <p><b>Fonte:</b> Meta Marketing API, conta ${esc(acc.accountId)}, de ${date(D.start)} a ${date(D.end)} (${esc(D.timezone)}), extraído em ${date(D.extractedAt)}. Investimento e impressões dos anúncios conferidos com o total da conta.</p>
+      <p><b>Ranking:</b> topo e meio por views de 50% do vídeo; fundo pelo evento configurado no conjunto (${esc(acc.conversionEvent)}), sem somar aliases da mesma conversão. Empate: menor custo por resultado e depois nome.</p>
+      <p><b>Consolidação:</b> versões da mesma peça foram agrupadas por vídeo, imagem ou post antes do ranking. A etapa segue o marcador da campanha.</p>
+      <p><b>Cálculos:</b> CTR de link = cliques no link ÷ impressões. Taxa de VV50% = views 50% ÷ impressões. ${acc.costLabel} = investimento ÷ ${acc.resultLabel}.</p>
+      <p><b>Leituras:</b> feitas a partir do frame, nome, copy e textos visíveis. Explicações de desempenho são hipóteses, não causas comprovadas.</p>
+    </div></details>`;
+  }
+
+  /* Cabeçalho, pódio e abas */
+  document.title = `${D.title} · ${D.client} · ${D.periodLabel}${D.demo ? ' (dados fictícios)' : ''}`;
+  document.getElementById('client-initial').textContent = D.client.charAt(0);
+  document.getElementById('client-line').textContent = `${D.client}, ${D.clientDescription}`;
+  document.getElementById('report-title').textContent = D.title;
+  document.getElementById('report-sub').textContent = D.subtitle;
+  document.getElementById('demo-flag').hidden = !D.demo;
+  document.getElementById('author').textContent = D.author;
+  document.getElementById('footer-left').textContent = D.demo ? 'Modelo de relatório. Marca, contas, criativos e números são fictícios.' : `Dados de ${date(D.start)} a ${date(D.end)}, extraídos em ${date(D.extractedAt)}.`;
+  document.getElementById('facts').innerHTML = [
+    ['Período', `${date(D.start)} a ${date(D.end)}`], ['Extração', date(D.extractedAt)], ['Contas', D.accounts.map(a => a.title).join(' e ')]
+  ].map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('');
+
+  const main = document.getElementById('conteudo');
+  main.innerHTML = D.accounts.map(accountPanel).join('') + worstPanel();
+
+  const tabsEl = document.getElementById('tabs');
+  const tabs = D.accounts.map(a => ({id: a.id, label: a.tab})).concat([{id: 'worst', label: 'O que evitar'}]);
+  tabsEl.innerHTML = tabs.map((t, i) => `<button class="tab" role="tab" id="tab-${t.id}" aria-controls="panel-${t.id}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${esc(t.label)}</button>`).join('');
+
+  function podium(accId) {
+    const acc = D.accounts.find(a => a.id === accId) || D.accounts[0];
+    document.getElementById('podium').innerHTML = Object.keys(STAGES).map((s, i) => {
+      const c = (acc.stages[s] || [])[0]; if (!c) return '';
+      const m = derive(c, s);
+      const val = s === 'fundo' ? `${int(c.results)} ${acc.resultLabel}` : `${compact(c.vv50)} views 50%`;
+      const img = c.thumb ? `<img src="${esc(c.thumb)}" alt="">` : frameSVG(c, i + (acc.id === 'b2c' ? 3 : 0) + s.length, STAGES[s].hex);
+      return `<a class="pod" href="#h-${acc.id}-${s}" data-tab="${acc.id}"><div class="frame">${img}</div><b><span class="stage-dot" style="background:${STAGES[s].hex}"></span>${STAGES[s].label.replace(' de funil', '')}</b><span>${val}</span></a>`;
+    }).join('');
+    document.getElementById('podium-hint').textContent = `Primeiro lugar de cada etapa em ${acc.title}.`;
+  }
+
+  function select(id, focus) {
+    tabs.forEach(t => {
+      const on = t.id === id;
+      const b = document.getElementById('tab-' + t.id);
+      b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1;
+      document.getElementById('panel-' + t.id).hidden = !on;
+      if (on && focus) b.focus();
+    });
+    if (id !== 'worst') podium(id);
+  }
+  tabsEl.addEventListener('click', e => { const b = e.target.closest('.tab'); if (b) select(b.id.replace('tab-', '')); });
+  tabsEl.addEventListener('keydown', e => {
+    if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+    const i = tabs.findIndex(t => document.getElementById('tab-' + t.id).getAttribute('aria-selected') === 'true');
+    const n = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+    select(tabs[n].id, true);
+  });
+  document.getElementById('podium').addEventListener('click', e => { const a = e.target.closest('.pod'); if (a) select(a.dataset.tab); });
+  select(D.accounts[0].id);
+
+  /* No modelo, os links são de exemplo */
+  const toast = document.getElementById('toast'); let tt;
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href="#exemplo"]'); if (!a) return;
+    e.preventDefault();
+    toast.textContent = 'Link de exemplo. No relatório real, abre o post original do anúncio.';
+    toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 2600);
+  });
+})();
+</script>
+</body>
+</html>

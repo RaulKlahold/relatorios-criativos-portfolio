@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Instagram orgânico · Top 5 do mês · modelo com dados fictícios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f2f3ef; --surface:#fff; --ink:#1c2422; --ink-2:#4a5552; --ink-3:#6f7a76; --line:#dadfd8; --line-2:#e8ebe6;
+    --brand:#0f4c47; --brand-soft:#e3eeea; --good:#2c855a; --good-soft:#e4f3ea; --warn:#b93f2d; --warn-soft:#fbebe7;
+    --mix-1:#0f4c47; --mix-2:#3767a8; --mix-3:#cf7224; --mix-4:#9aa39f;
+    --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif; --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+    --r-lg:22px; --r-md:14px; --r-sm:8px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+  a{color:inherit} button{font:inherit}
+  :focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:6px}
+  .wrap{width:min(1240px,100% - 40px);margin-inline:auto}
+
+  .hero{padding:44px 0 30px}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:40px;align-items:end}
+  .brandline{display:flex;align-items:center;gap:10px;margin:0 0 26px;color:var(--ink-2);font-weight:600;font-size:15px}
+  .logo{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--brand);color:#fff;font:800 17px var(--display)}
+  .hero h1{margin:0;font:800 clamp(40px,6vw,78px)/.95 var(--display);letter-spacing:-.04em}
+  .hero .sub{max-width:54ch;margin:18px 0 0;color:var(--ink-2);font-size:18px}
+  .facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin:26px 0 0}
+  .facts dt{color:var(--ink-3);font-size:13px} .facts dd{margin:0;font-weight:700}
+  .demo-flag{display:inline-block;margin-top:22px;padding:6px 12px;border:1px dashed #b9a24a;border-radius:99px;background:#fbf5d9;color:#5e4d06;font-size:13px;font-weight:600}
+  .actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;align-items:center}
+  .print{padding:9px 16px;border:0;border-radius:99px;background:var(--brand);color:#fff;font-weight:700;font-size:14px;cursor:pointer}
+
+  .leader{display:grid;grid-template-columns:minmax(0,1fr);padding:18px;border-radius:var(--r-lg);background:var(--brand);color:#fff;text-decoration:none}
+  .leader .frame{aspect-ratio:4/5;max-height:340px;border-radius:14px;overflow:hidden}
+  .leader .frame svg,.leader .frame img{display:block;width:100%;height:100%;object-fit:cover}
+  .leader p{margin:12px 0 0;color:#cfe2dc;font-size:14px}
+  .leader strong{display:block;font:800 30px/1.1 var(--display)}
+  .leader b{display:block;margin-top:2px;font-size:15px}
+
+  main{padding:10px 0 70px}
+  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--line)}
+  .kpi{padding:20px 22px;background:var(--surface)}
+  .kpi dt{color:var(--ink-2);font-size:14px}
+  .kpi dd{margin:4px 0 0;font:800 clamp(24px,2.6vw,32px)/1.1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .kpi small{display:block;margin-top:4px;color:var(--ink-3);font-size:13px}
+
+  section.block{margin-top:44px}
+  .block-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+  .block-head h2{margin:0;font:800 clamp(28px,3.2vw,40px)/1.05 var(--display);letter-spacing:-.03em}
+  .block-head p{margin:6px 0 0;max-width:62ch;color:var(--ink-2)}
+
+  .top5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}
+  .post{display:flex;flex-direction:column;height:100%;padding:10px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);text-decoration:none}
+  .post .frame{position:relative;aspect-ratio:4/5;border-radius:var(--r-md);overflow:hidden;background:var(--line-2)}
+  .post .frame svg,.post .frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+  .post .rank{position:absolute;left:8px;top:8px;display:grid;place-items:center;min-width:38px;height:38px;padding:0 6px;border-radius:11px;background:var(--surface);color:var(--brand);font:800 18px var(--display)}
+  .post .open{position:absolute;right:8px;top:12px;padding:5px 9px;border-radius:99px;background:rgb(255 255 255 / 94%);font-size:12px;font-weight:700}
+  .post .missing{display:grid;place-items:center;height:100%;color:var(--ink-2);font-weight:600}
+  .post h3{flex:1;margin:12px 4px 0;font:700 15px/1.3 var(--display);min-height:3.9em}
+  .post .meta{margin:4px 4px 0;color:var(--ink-3);font-size:13px}
+  .post .total{margin:10px 4px 0;padding-top:10px;border-top:1px solid var(--line-2)}
+  .post .total strong{display:block;font:800 26px/1 var(--display);color:var(--brand);font-variant-numeric:tabular-nums}
+  .post .total span{display:block;margin-top:4px;color:var(--ink-2);font-size:13px}
+  .note{margin:16px 0 0;padding:14px 18px;border-radius:var(--r-md);background:var(--brand-soft);color:#24433f;max-width:none}
+
+  .learn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .learn article{padding:20px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface)}
+  .learn h3{margin:0;font:700 19px/1.25 var(--display)}
+  .learn p{margin:8px 0 0;color:var(--ink-2);font-size:15px}
+  .learn .ex{display:block;margin-top:10px;color:var(--ink-3);font-size:13px}
+
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .compare article{padding:22px;border-radius:var(--r-lg)}
+  .compare .less{background:var(--warn-soft)} .compare .more{background:var(--good-soft)}
+  .compare h3{margin:0;font:800 24px/1.1 var(--display)}
+  .compare .less h3{color:var(--warn)} .compare .more h3{color:var(--good)}
+  .compare ul{margin:12px 0 0;padding-left:20px;color:#33403d}
+  .compare li+li{margin-top:7px}
+
+  .mix-bar{display:flex;height:22px;overflow:hidden;border-radius:99px;background:var(--line-2)}
+  .mix-bar span{display:block;height:100%}
+  .mix-legend{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:16px 0 0;padding:0;list-style:none}
+  .mix-legend li{padding-left:14px;border-left:4px solid var(--c)}
+  .mix-legend strong{display:block;font:800 26px/1.1 var(--display)}
+  .mix-legend span{color:var(--ink-2);font-size:14px}
+
+  details.method{margin-top:44px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface)}
+  details.method summary{padding:16px 20px;font-weight:700;cursor:pointer}
+  details.method div{padding:0 20px 18px;color:var(--ink-2);font-size:14px}
+  details.method p{margin:0 0 8px;max-width:90ch}
+
+  footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--ink-3);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer b{color:var(--ink)}
+  .toast{position:fixed;left:50%;bottom:24px;z-index:50;max-width:calc(100% - 32px);padding:12px 16px;border-radius:12px;background:var(--ink);color:#fff;font-size:14px;transform:translate(-50%,160%);transition:transform .25s ease}
+  .toast.show{transform:translate(-50%,0)}
+
+  @media (max-width:1100px){.top5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.leader{grid-template-columns:160px minmax(0,1fr);gap:16px;align-items:end}.leader p{margin-top:0}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.learn{grid-template-columns:1fr}.mix-legend{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:620px){
+    .wrap{width:min(1240px,100% - 24px)}
+    .hero{padding:28px 0 22px} .hero .sub{font-size:16px}
+    .print{display:none}
+    .leader{grid-template-columns:120px minmax(0,1fr)} .leader strong{font-size:24px}
+    .kpi{padding:16px}
+    .top5{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .post h3{font-size:14px;min-height:5.2em}
+    .post .total strong{font-size:22px}
+    .compare{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media print{
+    @page{size:A4;margin:12mm}
+    body{background:#fff;font-size:12px}
+    .print,.toast{display:none!important}
+    .top5{grid-template-columns:repeat(5,1fr)}
+    .post,.learn article,.compare article{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="brandline"><span class="logo" aria-hidden="true" id="initial">F</span><span id="profile-line"></span></p>
+      <h1 id="title"></h1>
+      <p class="sub" id="sub"></p>
+      <dl class="facts" id="facts"></dl>
+      <div class="actions">
+        <span class="demo-flag" id="demo-flag" hidden>Modelo com dados fictícios</span>
+        <button class="print" type="button" onclick="window.print()">Imprimir ou salvar PDF</button>
+      </div>
+    </div>
+    <a class="leader" id="leader" target="_blank" rel="noopener noreferrer"></a>
+  </div>
+</header>
+
+<main class="wrap" id="conteudo">
+  <dl class="kpis" id="kpis"></dl>
+
+  <section class="block" aria-labelledby="top-title">
+    <div class="block-head"><div><h2 id="top-title"></h2><p>Posts publicados no período, ordenados por interações públicas (curtidas + comentários). Toque na prévia para abrir o post.</p></div></div>
+    <ol class="top5" id="top5"></ol>
+    <p class="note" id="top-note"></p>
+  </section>
+
+  <section class="block" aria-labelledby="learn-title">
+    <div class="block-head"><div><h2 id="learn-title">O que deu certo</h2><p>Padrões que se repetem entre os posts com mais resposta. São hipóteses para orientar a pauta, não regras.</p></div></div>
+    <div class="learn" id="learn"></div>
+  </section>
+
+  <section class="block" aria-labelledby="next-title">
+    <div class="block-head"><div><h2 id="next-title">Próximo mês</h2><p>O que diminuir e o que transformar em teste.</p></div></div>
+    <div class="compare">
+      <article class="less"><h3>Reduzir</h3><ul id="reduce"></ul></article>
+      <article class="more"><h3>Testar mais</h3><ul id="test"></ul></article>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="mix-title" id="mix-block">
+    <div class="block-head"><div><h2 id="mix-title">Distribuição editorial sugerida</h2><p>Baseada no padrão de resposta observado no período, não em regra de algoritmo.</p></div></div>
+    <div class="mix-bar" id="mix-bar" role="img"></div>
+    <ul class="mix-legend" id="mix-legend"></ul>
+  </section>
+
+  <details class="method"><summary>Fonte, critérios e limites</summary><div id="method"></div></details>
+</main>
+
+<footer><div class="wrap"><span id="footer-left"></span><span>Feito por <b id="author"></b></span></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!--
+  DADOS DO RELATÓRIO
+  Liste TODOS os posts do período em "posts". O template ordena, corta o Top N e soma as interações sozinho.
+  Campos de cada post: title, date (AAAA-MM-DD), format (Reels | Carrossel | Foto), url (null = "Post não localizado"),
+  thumb (URL ou data URI do frame real; null = frame ilustrativo), frameText, likes, comments.
+  Métricas internas (alcance, salvamentos, compartilhamentos) só entram em "insights" se houver acesso autenticado.
+-->
+<script type="application/json" id="report-data">
+{
+  "demo": true,
+  "author": "Raul Klahold · Growth e mídia paga",
+  "brand": "Fôlego",
+  "profile": "folego.app",
+  "followers": 48200,
+  "title": "Instagram orgânico",
+  "subtitle": "O que o público mais respondeu no perfil durante o mês, o que isso sugere sobre a pauta e o que testar a seguir.",
+  "monthLabel": "setembro",
+  "start": "2026-09-01",
+  "end": "2026-09-30",
+  "collectedAt": "2026-10-01",
+  "topN": 5,
+  "source": "public",
+  "posts": [
+    {"title":"Bastidores: gravando o treino de 7 minutos","date":"2026-09-18","format":"Reels","url":"#exemplo","thumb":null,"frameText":"Bastidores do treino de 7 minutos","likes":1196,"comments":88},
+    {"title":"Lia, 52 anos: \"voltei a correr depois de 20 anos\"","date":"2026-09-09","format":"Reels","url":"#exemplo","thumb":null,"frameText":"Voltei a correr depois de 20 anos","likes":851,"comments":61},
+    {"title":"Treinar com dor no joelho? A fisio responde","date":"2026-09-23","format":"Reels","url":"#exemplo","thumb":null,"frameText":"Dor no joelho: pode treinar?","likes":668,"comments":78},
+    {"title":"Desafio 30 dias: como foi a primeira semana","date":"2026-09-07","format":"Carrossel","url":"#exemplo","thumb":null,"frameText":"Desafio 30 dias, semana 1","likes":487,"comments":31},
+    {"title":"O erro mais comum no agachamento","date":"2026-09-14","format":"Reels","url":"#exemplo","thumb":null,"frameText":"O erro mais comum no agachamento","likes":409,"comments":22},
+    {"title":"Nova funcionalidade: lembrete de pausa","date":"2026-09-03","format":"Foto","url":"#exemplo","thumb":null,"frameText":"Novidade no app","likes":214,"comments":9},
+    {"title":"5 benefícios do treino funcional","date":"2026-09-11","format":"Carrossel","url":"#exemplo","thumb":null,"frameText":"5 benefícios do funcional","likes":188,"comments":6},
+    {"title":"Frase motivacional de segunda","date":"2026-09-15","format":"Foto","url":"#exemplo","thumb":null,"frameText":"Comece pequeno. Mas comece.","likes":163,"comments":4},
+    {"title":"Promoção: plano anual com desconto","date":"2026-09-25","format":"Foto","url":"#exemplo","thumb":null,"frameText":"Plano anual com desconto","likes":121,"comments":12}
+  ],
+  "learnings": [
+    {"title":"Gente real fazendo, não falando","text":"Bastidores e treino acontecendo tiveram mais resposta do que peças só com texto ou produto.","example":"Ex.: bastidores do treino de 7 minutos (1º lugar)."},
+    {"title":"Pessoa com nome e história","text":"Nome, idade e um antes e depois de rotina deixam a mensagem crível e geram comentários de identificação.","example":"Ex.: Lia, 52 anos (2º lugar)."},
+    {"title":"Dúvida concreta, resposta direta","text":"Perguntas que o público já faz puxaram a maior proporção de comentários sobre curtidas do mês.","example":"Ex.: dor no joelho (3º lugar, 78 comentários)."}
+  ],
+  "reduce": [
+    "Listas de benefícios genéricos, sem pessoa nem situação.",
+    "Frases motivacionais soltas, sem ligação com o app.",
+    "Novidade de produto antes de mostrar o problema que ela resolve.",
+    "CTA de \"link na bio\" repetido em todos os posts."
+  ],
+  "test": [
+    "Série de dúvidas de dor e lesão, sempre com profissional respondendo.",
+    "Diário de alunos reais com prazo (semana 1, 2, 3, 4).",
+    "Bastidores de gravação com convite para fazer o treino junto.",
+    "CTA de conversa: \"qual parte do treino você mais trava?\""
+  ],
+  "mix": [
+    {"pct":40,"label":"pessoas, histórias e prova social"},
+    {"pct":30,"label":"dúvidas e educação"},
+    {"pct":20,"label":"bastidores e rotina"},
+    {"pct":10,"label":"produto e oferta direta"}
+  ]
+}
+</script>
+
+<script>
+(() => {
+  const D = JSON.parse(document.getElementById('report-data').textContent);
+  const int = n => Math.round(n).toLocaleString('pt-BR');
+  const pct = n => n.toLocaleString('pt-BR', {minimumFractionDigits: 1, maximumFractionDigits: 1}) + '%';
+  const compact = n => n >= 1000 ? (n / 1000).toLocaleString('pt-BR', {maximumFractionDigits: 1}) + ' mil' : int(n);
+  const date = s => { const [y, m, d] = s.split('-'); return `${d}/${m}/${y}`; };
+  const short = s => { const [, m, d] = s.split('-'); return `${d}/${m}`; };
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  const set = (id, html) => { document.getElementById(id).innerHTML = html; };
+
+  /* Só posts dentro do período. Ranking: interações desc, depois comentários, curtidas e data mais recente */
+  const inPeriod = D.posts.filter(p => p.date >= D.start && p.date <= D.end).map(p => ({...p, total: p.likes + p.comments}));
+  const ranked = [...inPeriod].sort((a, b) => b.total - a.total || b.comments - a.comments || b.likes - a.likes || b.date.localeCompare(a.date));
+  const top = ranked.slice(0, D.topN || 5);
+  const topSum = top.reduce((s, p) => s + p.total, 0);
+
+  /* Frame ilustrativo, usado só quando não há thumb real */
+  const TONES = [['#2b3a37', '#6f8f86'], ['#3b2f2a', '#b08a6e'], ['#24324a', '#7d93b8'], ['#33392a', '#9aa36f'], ['#3a2b38', '#a87d9e']];
+  const ACC = ['#cf7224', '#3767a8', '#2c855a', '#0f4c47', '#b93f2d'];
+  function wrap(t, max) { const w = t.split(' '), out = []; let l = ''; w.forEach(x => { if ((l + ' ' + x).trim().length > max && l) { out.push(l); l = x; } else l = (l + ' ' + x).trim(); }); if (l) out.push(l); return out.slice(0, 3); }
+  function frame(p, seed) {
+    const [a, b] = TONES[seed % TONES.length], acc = ACC[seed % ACC.length];
+    const lines = wrap(p.frameText || p.title, 18), lh = 32, boxH = lines.length * lh + 26, boxY = 476 - boxH;
+    const id = 'o' + seed + Math.random().toString(36).slice(2, 6), sx = 130 + (seed * 53) % 140;
+    return `<svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Frame ilustrativo: ${esc(p.frameText || p.title)}" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${b}"/><stop offset="1" stop-color="${a}"/></linearGradient></defs>
+      <rect width="400" height="500" fill="url(#${id})"/><circle cx="${320 - (seed * 37) % 140}" cy="120" r="120" fill="#fff" opacity=".08"/>
+      <circle cx="${sx}" cy="170" r="48" fill="#f1e3d3" opacity=".92"/><path d="M${sx - 100} 500 C ${sx - 92} 262, ${sx + 92} 262, ${sx + 100} 500 Z" fill="${acc}" opacity=".9"/>
+      <rect x="22" y="${boxY}" width="356" height="${boxH}" rx="14" fill="#fff" opacity=".95"/>
+      ${lines.map((l, i) => `<text x="40" y="${boxY + 36 + i * lh}" font-family="Bricolage Grotesque,Segoe UI,sans-serif" font-size="27" font-weight="700" fill="#1c2422">${esc(l)}</text>`).join('')}
+    </svg>`;
+  }
+  const visual = (p, i) => p.thumb ? `<img src="${esc(p.thumb)}" alt="Prévia do post: ${esc(p.title)}" loading="lazy">` : frame(p, i);
+
+  /* Cabeçalho */
+  document.title = `${D.title} · @${D.profile} · ${D.monthLabel}${D.demo ? ' (dados fictícios)' : ''}`;
+  document.getElementById('initial').textContent = D.brand.charAt(0);
+  document.getElementById('profile-line').textContent = `@${D.profile}`;
+  document.getElementById('title').textContent = D.title;
+  document.getElementById('sub').textContent = D.subtitle;
+  document.getElementById('demo-flag').hidden = !D.demo;
+  document.getElementById('author').textContent = D.author;
+  document.getElementById('footer-left').textContent = D.demo ? 'Modelo de relatório. Perfil, posts e números são fictícios.' : `Coleta em ${date(D.collectedAt)}.`;
+  set('facts', [['Período', `${date(D.start)} a ${date(D.end)}`], ['Coleta', date(D.collectedAt)], ['Fonte', D.source === 'public' ? 'Dados públicos do perfil' : 'Insights da conta']]
+    .map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join(''));
+
+  const lead = top[0];
+  const leader = document.getElementById('leader');
+  if (lead) {
+    if (lead.url) leader.href = lead.url; else leader.removeAttribute('href');
+    leader.setAttribute('aria-label', `Post líder do mês: ${lead.title}`);
+    leader.innerHTML = `<div class="frame">${visual(lead, 0)}</div><p>Post com mais resposta em ${esc(D.monthLabel)}<strong>${int(lead.total)}</strong><b>${esc(lead.title)}</b></p>`;
+  }
+
+  /* Indicadores */
+  set('kpis', [
+    ['Seguidores', compact(D.followers), `@${esc(D.profile)} na coleta`],
+    ['Posts no período', int(inPeriod.length), `${short(D.start)} a ${short(D.end)}`],
+    ['Interações no Top ' + top.length, int(topSum), 'curtidas + comentários públicos'],
+    ['Média por post', int(inPeriod.reduce((s, p) => s + p.total, 0) / (inPeriod.length || 1)), 'todos os posts do período']
+  ].map(([k, v, s]) => `<div class="kpi"><dt>${k}</dt><dd>${v}</dd><small>${s}</small></div>`).join(''));
+
+  /* Top N */
+  document.getElementById('top-title').textContent = `Top ${top.length} de ${D.monthLabel}`;
+  set('top5', top.map((p, i) => {
+    const inner = `<div class="frame">${p.url ? visual(p, i) : '<span class="missing">Post não localizado</span>'}<span class="rank">${i + 1}</span>${p.url ? '<span class="open">Abrir post ↗</span>' : ''}</div>
+      <h3>${esc(p.title)}</h3><p class="meta">${esc(p.format)}, ${short(p.date)}</p>
+      <div class="total"><strong>${int(p.total)}</strong><span>${int(p.likes)} curtidas e ${int(p.comments)} comentários</span></div>`;
+    return `<li>${p.url ? `<a class="post" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir post ${i + 1}: ${esc(p.title)}">${inner}</a>` : `<div class="post">${inner}</div>`}</li>`;
+  }).join(''));
+  const shortage = top.length < (D.topN || 5) ? ` O período teve só ${top.length} posts, por isso o ranking tem menos de ${D.topN || 5} posições.` : '';
+  document.getElementById('top-note').textContent = lead
+    ? `O primeiro lugar concentrou ${pct(lead.total / topSum * 100)} das interações do Top ${top.length}. Os ${top.length} posts do ranking somaram ${pct(topSum / inPeriod.reduce((s, p) => s + p.total, 0) * 100)} de toda a resposta pública do mês.${shortage}`
+    : 'Nenhum post publicado no período.';
+
+  /* Leitura editorial */
+  set('learn', D.learnings.map(l => `<article><h3>${esc(l.title)}</h3><p>${esc(l.text)}</p>${l.example ? `<span class="ex">${esc(l.example)}</span>` : ''}</article>`).join(''));
+  set('reduce', D.reduce.map(x => `<li>${esc(x)}</li>`).join(''));
+  set('test', D.test.map(x => `<li>${esc(x)}</li>`).join(''));
+
+  if (D.mix && D.mix.length) {
+    const colors = ['var(--mix-1)', 'var(--mix-2)', 'var(--mix-3)', 'var(--mix-4)'];
+    set('mix-bar', D.mix.map((m, i) => `<span style="width:${m.pct}%;background:${colors[i % 4]}"></span>`).join(''));
+    document.getElementById('mix-bar').setAttribute('aria-label', D.mix.map(m => `${m.pct}% ${m.label}`).join(', '));
+    set('mix-legend', D.mix.map((m, i) => `<li style="--c:${colors[i % 4]}"><strong>${m.pct}%</strong><span>${esc(m.label)}</span></li>`).join(''));
+  } else document.getElementById('mix-block').hidden = true;
+
+  set('method', `
+    <p><b>Fonte:</b> ${D.source === 'public' ? 'perfil público' : 'insights da conta'} @${esc(D.profile)}, coletado em ${date(D.collectedAt)}. Entraram ${inPeriod.length} posts publicados de ${date(D.start)} a ${date(D.end)}. Posts fixados de meses anteriores e anúncios não entram no ranking.</p>
+    <p><b>Métrica:</b> interações públicas = curtidas + comentários. Empate: mais comentários, depois mais curtidas, depois o mais recente.</p>
+    <p><b>Limite:</b> ${D.source === 'public' ? 'dados públicos não mostram alcance, salvamentos, compartilhamentos nem visitas ao perfil. Por isso o relatório mede resposta pública visível, e não engajamento total.' : 'métricas internas vêm dos insights da conta e não são comparáveis com dados públicos de outros perfis.'} As explicações de desempenho são hipóteses.</p>`);
+
+  const toast = document.getElementById('toast'); let tt;
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href="#exemplo"]'); if (!a) return;
+    e.preventDefault();
+    toast.textContent = 'Link de exemplo. No relatório real, abre o post no Instagram.';
+    toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 2600);
+  });
+})();
+</script>
+</body>
+</html>
