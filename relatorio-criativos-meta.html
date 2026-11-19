@@ -289,6 +289,47 @@
     .card,.post,.learn article,details.method{background:#fff;border:1px solid var(--line)}
     .result strong,.stage-head h3,.mix-legend strong{text-shadow:none}
   }
+
+  /* ===== Ajuste 2: números grandes em Space Grotesk e caixas mais organizadas ===== */
+  .kpi dd,.result strong,.post .total strong,.leader strong,.mix-legend strong{font-family:var(--display);font-weight:600;letter-spacing:-.035em;font-variant-numeric:tabular-nums lining-nums}
+  .kpi dd{font-size:clamp(28px,2.8vw,36px);margin-top:8px}
+  .leader strong{font-size:40px}
+  .post .total strong{font-size:30px}
+  .mix-legend strong{font-size:30px}
+
+  /* Caixa de resultado: rótulo em cima, valor embaixo, dos dois lados */
+  .result{display:grid;grid-template-columns:1fr auto;align-items:end;gap:14px;padding:14px 16px}
+  .result strong{display:flex;flex-direction:column-reverse;gap:6px;font-size:36px;line-height:.95;white-space:nowrap}
+  .result strong small,.result span{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;line-height:1.2}
+  .result strong small{color:color-mix(in srgb,var(--c) 75%,#fff);text-shadow:none}
+  .result span{display:flex;flex-direction:column;align-items:flex-end;gap:6px;color:var(--ink-3);white-space:nowrap}
+  .result span b{display:block;font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:-.02em;text-transform:none;color:var(--ink);line-height:1.1}
+
+  /* Métricas: rótulo mono, valor legível */
+  .metrics{gap:14px 10px;padding:14px 2px}
+  .metrics dt{margin-bottom:3px}
+  .metrics dd{font-family:var(--body);font-weight:600;font-size:14.5px;font-variant-numeric:tabular-nums}
+
+  /* Leitura / Hook / Próximo teste: rótulo em linha própria e fio da cor da etapa */
+  .notes{margin-top:16px;font-size:14px;line-height:1.55}
+  .notes li{padding-left:12px;border-left:2px solid color-mix(in srgb,var(--c,#a855f7) 45%,transparent)}
+  .notes li+li{margin-top:14px}
+  .notes b{display:block;margin-bottom:3px;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--c,#a855f7) 80%,#fff)}
+
+  /* Instagram: listas com marcador próprio */
+  .compare ul{list-style:none;padding-left:0;margin-top:16px}
+  .compare li{position:relative;padding-left:22px;line-height:1.5}
+  .compare li+li{margin-top:12px}
+  .compare li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:2px;transform:rotate(45deg)}
+  .compare .less li::before{background:var(--warn);box-shadow:0 0 10px var(--warn)}
+  .compare .more li::before{background:var(--good);box-shadow:0 0 10px var(--good)}
+  .learn article{display:flex;flex-direction:column}
+  .learn p{flex:1}
+  .learn .ex{margin-top:14px;padding-top:10px;border-top:1px solid var(--line-2)}
+  .post .total span{margin-top:6px}
+  .result{align-items:stretch}
+  .result strong,.result span{justify-content:space-between}
+  @media print{.result strong small{color:inherit}.notes b{color:#4c1d95}}
 </style>
 </head>
 <body>
@@ -541,7 +582,7 @@
       <div class="ident"><h4>${title}</h4><div class="chips">${chips}</div></div>
       <div class="result">${result}</div>
       <dl class="metrics">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
-      <ul class="notes">${notes.map(([k, v]) => `<li><b>${k}:</b> ${esc(v || 'Sem informação suficiente para esta leitura.')}</li>`).join('')}</ul>
+      <ul class="notes">${notes.map(([k, v]) => `<li><b>${k}</b> ${esc(v || 'Sem informação suficiente para esta leitura.')}</li>`).join('')}</ul>
     </article>`;
   }
   const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
