@@ -41,6 +41,8 @@ Os templates ficam na raiz deste repositório. **Não reescreva o HTML.** Cada t
 - Não misture tipos de resultado: lead da plataforma, lead do CRM e lead qualificado são coisas diferentes. Só chame de "qualificado" quando houver cruzamento explícito com a fonte comercial e uma regra de qualificação informada pelo usuário.
 - Explicações de desempenho são hipóteses. Use "pode indicar", "o padrão sugere" ou "possível motivo", nunca causalidade afirmada.
 - Não invente fala, áudio nem argumento. Sem transcrição, a leitura se limita ao frame, aos textos visíveis, ao nome e à copy.
+- **Os números vêm do conector (MCP) da plataforma.** Ordem de fonte: 1) MCP do Meta Ads / Instagram disponível na sessão; 2) API oficial; 3) exportação enviada pelo usuário. Registre em `dados-fonte.json` qual fonte e quais chamadas foram usadas. Nunca copie número de print, de relatório anterior ou de memória.
+- **O frame é o anúncio (ou o post) como ele aparece na plataforma**: a prévia no feed do Instagram ou do Facebook, com cabeçalho da página, mídia, texto e botão de CTA, e não um frame solto do vídeo nem uma imagem genérica. Veja A1 e B1 para como obter.
 - Frame, nome e link de cada card apontam para a mesma publicação. Se o post não for localizado, use `"url": null`, e o template mostra "Post não localizado". Nunca fabrique URL.
 - Formato brasileiro: `R$ 1.234,56` e `2,04%`, com no máximo duas casas. O template já formata; no JSON, os números vão crus (`1234.56`).
 - Nenhum token, cookie, dado pessoal de lead ou credencial entra no HTML nem nos arquivos de apoio.
@@ -51,7 +53,7 @@ Os templates ficam na raiz deste repositório. **Não reescreva o HTML.** Cada t
 
 ## A1. Coleta
 
-Use o conector ou a API do Meta disponível na sessão. Se não houver acesso, peça ao usuário uma exportação do Gerenciador de Anúncios no nível de anúncio, com as colunas abaixo, e siga com ela.
+Use primeiro o **MCP do Meta Ads** disponível na sessão; só sem ele, a API. Se não houver acesso, peça ao usuário uma exportação do Gerenciador de Anúncios no nível de anúncio, com as colunas abaixo, e siga com ela (sem exportação não há como tirar a prévia: avise que os frames ficarão como "Post não localizado").
 
 Por conta, no período, **no nível de anúncio**:
 
@@ -61,6 +63,15 @@ Por conta, no período, **no nível de anúncio**:
 - identificadores da peça: `video_id`, `image_hash`, `effective_object_story_id`, `instagram_permalink_url`, `thumbnail_url`;
 - texto principal, título e descrição, quando disponíveis;
 - no conjunto: `optimization_goal` e `promoted_object` (define o evento de conversão).
+
+Se o conector não devolver `video_p50_watched_actions` (ou devolver com outro nome), não troque por outra métrica de vídeo: procure o campo equivalente a "reproduções de 50%" e, se não existir, deixe `vv50` vazio e registre a falta na metodologia.
+
+**Prévia do anúncio (frame do card).** Para cada peça que entra no relatório:
+1. Peça a prévia renderizada do anúncio (`/{ad_id}/previews` ou a ferramenta de prévia do MCP), no posicionamento principal em que ele rodou: `INSTAGRAM_STANDARD` (feed do Instagram) ou `MOBILE_FEED_STANDARD` (feed do Facebook). Na dúvida, use o posicionamento com mais impressões.
+2. Abra a prévia no navegador e faça a captura do anúncio inteiro, como o usuário vê: cabeçalho da página, mídia, texto principal e botão de CTA. Em vídeo, a captura mostra o primeiro frame dentro do layout do feed.
+3. Converta para JPEG de cerca de 600 px de largura e coloque em `thumb` como data URI.
+4. O `url` do card é o link do anúncio publicado: `instagram_permalink_url` quando rodou no Instagram, ou o post da página (`effective_object_story_id`) no Facebook.
+5. Sem link e sem prévia na plataforma, o anúncio não existe mais lá: não procure alternativa. Use `url: null` e `thumb: null` (o card mostra "Post não localizado") e registre na metodologia.
 
 Faça também uma consulta **no nível da conta** com investimento, impressões, cliques no link e resultados do mesmo período. Esses são os totais dos indicadores do topo (`totals` no JSON).
 
@@ -129,7 +140,7 @@ Copie `relatorio-criativos-meta.html` para `{OUTPUT_DIR}/relatorio-criativos-met
 
 Cada criativo leva `name`, `format` (`VID`, `IMG` ou `CAR`), `url`, `thumb`, `badges`, `spend`, `impressions`, `clicks`, `vv50` (topo/meio) ou `results` (fundo) e `notes`. Em `worst`, inclua também `stage` e `kind` (`alert` ou `context`).
 
-- `thumb`: prefira incorporar o frame como data URI (JPEG, cerca de 600 px de largura), porque links de thumbnail do Meta expiram. Com `thumb: null`, o template desenha um frame ilustrativo usando `frameText`; isso serve para modelo, não para relatório real.
+- `thumb`: a captura da prévia do anúncio como aparece no feed (ver A1), incorporada como data URI (JPEG, cerca de 600 px de largura), porque links de thumbnail do Meta expiram. Não use `thumbnail_url` sozinho: ele é só a mídia, sem o anúncio em volta. Com `thumb: null`, o template desenha um frame ilustrativo usando `frameText`; isso serve para modelo, não para relatório real.
 - `badges`: só quando ajudarem a ler (`Maior volume`, `Melhor taxa`, `Melhor CPL`, `Pouca entrega`, `Contexto específico`).
 - Uma conta vira uma aba. Com uma conta só, ainda há duas abas (a conta e "O que evitar").
 
@@ -139,6 +150,7 @@ Cada criativo leva `name`, `format` (`VID`, `IMG` ou `CAR`), `url`, `thumb`, `ba
 
 ## B1. Coleta
 
+- Fonte: primeiro o **MCP do Instagram/Meta** disponível na sessão (mídias do perfil com curtidas, comentários e permalink); sem ele, a API do Instagram; sem acesso, os dados públicos do perfil.
 - Liste **todos** os posts publicados entre `{START_DATE}` e `{END_DATE}`, não só os do último dia.
 - Posts fixados de meses anteriores e anúncios ficam fora do ranking.
 - Para cada post, colete a URL, a data, o formato (Reels, Carrossel ou Foto), uma legenda curta, o frame, as curtidas e os comentários.
@@ -161,7 +173,7 @@ Cada criativo leva `name`, `format` (`VID`, `IMG` ou `CAR`), `url`, `thumb`, `ba
 
 ## B4. Preenchimento do JSON (modo B)
 
-Copie `relatorio-instagram-organico.html` para `{OUTPUT_DIR}/relatorio-instagram-organico.html` e substitua o bloco `report-data`. Os campos são `demo`, `author`, `brand`, `profile`, `followers`, `title`, `subtitle`, `monthLabel`, `start`, `end`, `collectedAt`, `topN`, `source`, `posts[]`, `learnings[]`, `reduce[]`, `test[]` e `mix[]`. Use `thumb` com o frame real do post; nunca uma imagem genérica.
+Copie `relatorio-instagram-organico.html` para `{OUTPUT_DIR}/relatorio-instagram-organico.html` e substitua o bloco `report-data`. Os campos são `demo`, `author`, `brand`, `profile`, `followers`, `title`, `subtitle`, `monthLabel`, `start`, `end`, `collectedAt`, `topN`, `source`, `posts[]`, `learnings[]`, `reduce[]`, `test[]` e `mix[]`. Em `thumb`, use a captura do post como ele aparece no Instagram (abrir o `permalink` e capturar o post: cabeçalho do perfil, mídia e início da legenda), em JPEG de cerca de 600 px como data URI; nunca uma imagem genérica. Se o post exigir login e não abrir, use a mídia do post (`media_url`/`thumbnail_url`) e registre isso na metodologia.
 
 ---
 
@@ -187,6 +199,8 @@ Dados:
 
 Links e imagens:
 - [ ] Cada `url` é do post certo (confira o ID do post contra o anúncio ou o perfil). Links do Instagram e do Facebook podem exigir login para abrir. Isso não é erro; o que não pode é URL inventada.
+- [ ] Cada frame é a prévia do anúncio/post como aparece no feed (cabeçalho, mídia, texto, CTA), e não só a mídia solta.
+- [ ] `dados-fonte.json` diz de qual fonte (MCP, API ou exportação) veio cada número.
 - [ ] Nenhuma imagem quebrada e nenhum caractere `�`.
 
 Visual (abrir no navegador):
