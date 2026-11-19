@@ -6,7 +6,7 @@
 <title>Instagram orgânico · Top 5 do mês · modelo com dados fictícios</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#f2f3ef; --surface:#fff; --ink:#1c2422; --ink-2:#4a5552; --ink-3:#6f7a76; --line:#dadfd8; --line-2:#e8ebe6;
@@ -118,6 +118,147 @@
     .print,.toast{display:none!important}
     .top5{grid-template-columns:repeat(5,1fr)}
     .post,.learn article,.compare article{break-inside:avoid}
+  }
+</style>
+<style id="tema-aurora">
+  /* ===== Tema Aurora: fundo escuro, gradiente roxo → azul → rosa, vidro e bordas em gradiente ===== */
+  :root{
+    --paper:#07060f; --surface:rgb(255 255 255 / 4.5%); --surface-solid:#110f22;
+    --ink:#f5f3ff; --ink-2:#bdb7dc; --ink-3:#8c86ad; --line:rgb(255 255 255 / 10%); --line-2:rgb(255 255 255 / 7%);
+    --brand:#8b5cf6; --brand-soft:rgb(139 92 246 / 14%);
+    --grad:linear-gradient(110deg,#a855f7 0%,#6366f1 38%,#22d3ee 68%,#ec4899 100%);
+    --grad-soft:linear-gradient(135deg,rgb(168 85 247 / 22%),rgb(99 102 241 / 14%) 50%,rgb(236 72 153 / 18%));
+    --topo:#ff5fd2; --topo-soft:rgb(255 95 210 / 13%); --meio:#7c9dff; --meio-soft:rgb(124 157 255 / 13%); --fundo:#34eba9; --fundo-soft:rgb(52 235 169 / 12%);
+    --alert:#ff6b81; --alert-soft:rgb(255 107 129 / 13%); --context:#c4a6ff; --context-soft:rgb(196 166 255 / 13%);
+    --good:#34eba9; --good-soft:rgb(52 235 169 / 9%); --warn:#ff6b81; --warn-soft:rgb(255 107 129 / 9%);
+    --mix-1:#a855f7; --mix-2:#6366f1; --mix-3:#ec4899; --mix-4:#22d3ee;
+    --display:"Space Grotesk","Segoe UI",system-ui,sans-serif; --body:"Inter","Segoe UI",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  }
+  html{background:var(--paper)}
+  body{position:relative;background:transparent;color:var(--ink);font-size:15.5px;isolation:isolate}
+  body::before{content:"";position:fixed;inset:-20vmax;z-index:-2;pointer-events:none;
+    background:
+      radial-gradient(40vmax 32vmax at 12% 8%,rgb(168 85 247 / 38%),transparent 62%),
+      radial-gradient(38vmax 30vmax at 88% 4%,rgb(56 189 248 / 26%),transparent 60%),
+      radial-gradient(42vmax 34vmax at 78% 62%,rgb(236 72 153 / 22%),transparent 62%),
+      radial-gradient(40vmax 34vmax at 8% 82%,rgb(99 102 241 / 26%),transparent 62%),var(--paper);
+    filter:saturate(1.15);animation:aurora 26s ease-in-out infinite alternate}
+  body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+    background-image:linear-gradient(rgb(255 255 255 / 3.5%) 1px,transparent 1px),linear-gradient(90deg,rgb(255 255 255 / 3.5%) 1px,transparent 1px);
+    background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 0%,#000 30%,transparent 78%)}
+  @keyframes aurora{0%{transform:translate3d(0,0,0) rotate(0)}50%{transform:translate3d(-3%,2%,0) rotate(4deg)}100%{transform:translate3d(2%,-2%,0) rotate(-3deg)}}
+  ::selection{background:#a855f7;color:#fff}
+  :focus-visible{outline-color:#22d3ee}
+
+  /* Cabeçalho */
+  .brandline{color:var(--ink-2);font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+  .logo{background:var(--grad);box-shadow:0 0 24px rgb(168 85 247 / 55%);font-family:var(--display)}
+  .hero h1{font-family:var(--display);font-weight:700;letter-spacing:-.045em;line-height:.92;
+    background:linear-gradient(100deg,#fff 0%,#e9ddff 30%,#c4b5fd 52%,#7dd3fc 74%,#f9a8d4 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero h1::after{content:" ✦";font-size:.42em;vertical-align:.9em;-webkit-text-fill-color:#f0abfc;text-shadow:0 0 22px #e879f9}
+  .hero .sub{color:var(--ink-2)}
+  .facts dt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  .facts dd{font-family:var(--mono);font-weight:500;font-size:14px}
+  .demo-flag{border:1px dashed rgb(240 171 252 / 55%);background:rgb(236 72 153 / 10%);color:#f9a8d4;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.03em}
+
+  /* Blocos de destaque com fundo em gradiente */
+  .podium,.leader{position:relative;overflow:hidden;background:
+      radial-gradient(120% 90% at 0% 0%,rgb(168 85 247 / 75%),transparent 60%),
+      radial-gradient(120% 90% at 100% 100%,rgb(236 72 153 / 60%),transparent 55%),
+      linear-gradient(135deg,#2a1873,#14123a 60%,#0d0b24);
+    border:1px solid rgb(255 255 255 / 14%);box-shadow:0 30px 80px -30px rgb(139 92 246 / 70%),inset 0 1px 0 rgb(255 255 255 / 18%)}
+  .podium h2{font-family:var(--display);letter-spacing:-.01em}
+  .podium p.hint,.pod span,.leader p{color:#d8ccff}
+  .pod .frame,.leader .frame{box-shadow:0 10px 30px -10px rgb(0 0 0 / 60%);outline:1px solid rgb(255 255 255 / 14%);outline-offset:-1px}
+  .leader strong{font-family:var(--mono);font-weight:700;letter-spacing:-.03em;font-size:34px}
+
+  /* Barra e abas */
+  .bar{background:rgb(7 6 15 / 72%);border-color:var(--line);backdrop-filter:blur(18px) saturate(1.4)}
+  .tab{background:rgb(255 255 255 / 4%);border-color:var(--line);color:var(--ink-2);transition:all .2s ease}
+  .tab:hover{color:var(--ink);border-color:rgb(255 255 255 / 22%)}
+  .tab[aria-selected="true"]{border-color:transparent;background:var(--grad);color:#fff;box-shadow:0 6px 24px -6px rgb(168 85 247 / 70%)}
+  .print{background:var(--grad);background-size:160% 100%;color:#fff;box-shadow:0 8px 26px -8px rgb(236 72 153 / 65%);transition:background-position .4s ease,transform .2s ease}
+  .print:hover{background-position:100% 0;transform:translateY(-1px)}
+
+  /* Títulos de seção */
+  .panel-head h2,.block-head h2{font-family:var(--display);font-weight:700;letter-spacing:-.035em}
+  .panel-head p,.block-head p{color:var(--ink-2)}
+  .partial{background:rgb(255 255 255 / 5%);border-color:var(--line);color:var(--ink-2);font-family:var(--mono);font-size:12px;font-weight:500}
+
+  /* KPIs */
+  .kpis{gap:12px;overflow:visible;border:0;border-radius:0;background:none}
+  .kpi{position:relative;border-radius:18px;background:var(--surface);border:1px solid var(--line);backdrop-filter:blur(14px);overflow:hidden}
+  .kpi::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:var(--grad)}
+  .kpi dt{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .kpi dd{font-family:var(--mono);font-weight:700;letter-spacing:-.04em;background:linear-gradient(100deg,#fff,#c4b5fd 60%,#7dd3fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .kpi small{color:var(--ink-3)}
+
+  /* Etapas do funil */
+  .stage-head{border-bottom:1px solid var(--line);position:relative}
+  .stage-head::after{content:"";position:absolute;left:0;bottom:-1px;width:180px;height:2px;background:linear-gradient(90deg,var(--c),transparent);box-shadow:0 0 14px var(--c)}
+  .stage-head h3{font-family:var(--display);font-weight:700;letter-spacing:-.02em;text-shadow:0 0 28px color-mix(in srgb,var(--c) 55%,transparent)}
+  .stage-head p{color:var(--ink-2)} .stage-head .count{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+
+  /* Cards com borda em gradiente */
+  .card,.post,.learn article,details.method{border:1px solid transparent;
+    background:linear-gradient(var(--surface-solid),var(--surface-solid)) padding-box,
+               linear-gradient(140deg,rgb(168 85 247 / 55%),rgb(255 255 255 / 8%) 35%,rgb(255 255 255 / 6%) 65%,rgb(236 72 153 / 45%)) border-box;
+    transition:transform .25s ease,box-shadow .25s ease}
+  .card:hover,.post:hover{transform:translateY(-3px);box-shadow:0 22px 50px -24px rgb(168 85 247 / 70%)}
+  .media,.post .frame{outline:1px solid rgb(255 255 255 / 8%);outline-offset:-1px}
+  .media .open,.post .open{background:rgb(10 8 24 / 70%);color:#fff;border:1px solid rgb(255 255 255 / 20%);backdrop-filter:blur(8px);box-shadow:none;font-family:var(--mono);font-weight:500;font-size:11px}
+  .media .rank,.post .rank{background:rgb(10 8 24 / 72%);border:1px solid color-mix(in srgb,var(--c,#a855f7) 70%,transparent);color:var(--c,#e9d5ff);backdrop-filter:blur(8px);font-family:var(--mono);font-weight:700;box-shadow:0 0 18px color-mix(in srgb,var(--c,#a855f7) 45%,transparent)}
+  .ident h4,.post h3{font-family:var(--display);font-weight:600;letter-spacing:-.01em}
+  .chip{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.02em;border:1px solid color-mix(in srgb,var(--c) 40%,transparent)}
+  .chip.neutral{background:rgb(255 255 255 / 6%);color:var(--ink-2);border-color:var(--line)}
+  .chip.alert{border-color:rgb(255 107 129 / 40%)} .chip.context{border-color:rgb(196 166 255 / 40%)}
+  .result{background:var(--cs);border:1px solid color-mix(in srgb,var(--c) 30%,transparent)}
+  .result strong{font-family:var(--mono);font-weight:700;letter-spacing:-.04em;text-shadow:0 0 24px color-mix(in srgb,var(--c) 60%,transparent)}
+  .result strong small{font-family:var(--mono);font-weight:500;font-size:12px}
+  .result span b{color:var(--ink);font-family:var(--mono);font-weight:600}
+  .metrics{border-color:var(--line-2)}
+  .metrics dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+  .metrics dd{font-family:var(--mono);font-weight:500;font-size:13.5px}
+  .notes{color:var(--ink-2)} .notes b{color:#e9d5ff}
+
+  .rule{position:relative;overflow:hidden;background:var(--grad-soft),var(--surface-solid);border:1px solid rgb(255 255 255 / 12%)}
+  .rule strong{font-family:var(--display);font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .rule span{color:var(--ink-2)}
+
+  /* Instagram: ranking, leitura, comparação, mix */
+  .post{--c:#c084fc}
+  .post .meta{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+  .post .total{border-color:var(--line-2)}
+  .post .total strong{font-family:var(--mono);font-weight:700;letter-spacing:-.04em;background:linear-gradient(100deg,#f0abfc,#a5b4fc 55%,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .post .total span{color:var(--ink-3)}
+  .note{background:var(--grad-soft);border:1px solid rgb(255 255 255 / 10%);color:#e4dcff}
+  .learn h3{font-family:var(--display);font-weight:600}
+  .learn .ex{font-family:var(--mono);font-size:11.5px}
+  .compare article{border:1px solid var(--line);backdrop-filter:blur(12px)}
+  .compare .less{background:linear-gradient(160deg,rgb(255 107 129 / 16%),rgb(255 255 255 / 3%))}
+  .compare .more{background:linear-gradient(160deg,rgb(52 235 169 / 14%),rgb(255 255 255 / 3%))}
+  .compare h3{font-family:var(--display);font-weight:700}
+  .compare ul{color:var(--ink-2)}
+  .mix-bar{height:14px;background:rgb(255 255 255 / 6%);box-shadow:0 0 30px -6px rgb(168 85 247 / 70%)}
+  .mix-legend li{border-left-width:2px}
+  .mix-legend strong{font-family:var(--mono);font-weight:700;color:var(--c);text-shadow:0 0 20px color-mix(in srgb,var(--c) 55%,transparent)}
+  .mix-legend span{color:var(--ink-2)}
+
+  details.method summary{font-family:var(--mono);font-size:13px;font-weight:500;letter-spacing:.02em}
+  details.method div{color:var(--ink-2)}
+  footer{border-color:var(--line);color:var(--ink-3);font-family:var(--mono);font-size:12px}
+  footer b{color:var(--ink)}
+  .toast{background:var(--surface-solid);border:1px solid rgb(168 85 247 / 50%);box-shadow:0 10px 40px -10px rgb(168 85 247 / 70%)}
+  .skip{background:var(--grad)}
+
+  @media (max-width:1060px){.kpis{gap:10px}}
+  @media (prefers-reduced-motion:reduce){body::before{animation:none}.card:hover,.post:hover{transform:none}}
+  @media print{
+    :root{--paper:#fff;--surface:#fff;--surface-solid:#fff;--ink:#16121f;--ink-2:#463f5c;--ink-3:#6b6485;--line:#e2def0;--line-2:#eeeaf7}
+    html,body{background:#fff!important} body::before,body::after{display:none}
+    .hero h1,.kpi dd,.post .total strong,.rule strong{background:none;color:#4c1d95;-webkit-text-fill-color:#4c1d95}
+    .card,.post,.learn article,details.method{background:#fff;border:1px solid var(--line)}
+    .result strong,.stage-head h3,.mix-legend strong{text-shadow:none}
   }
 </style>
 </head>
@@ -249,8 +390,8 @@
   const topSum = top.reduce((s, p) => s + p.total, 0);
 
   /* Frame ilustrativo, usado só quando não há thumb real */
-  const TONES = [['#2b3a37', '#6f8f86'], ['#3b2f2a', '#b08a6e'], ['#24324a', '#7d93b8'], ['#33392a', '#9aa36f'], ['#3a2b38', '#a87d9e']];
-  const ACC = ['#cf7224', '#3767a8', '#2c855a', '#0f4c47', '#b93f2d'];
+  const TONES = [['#1e1048', '#7c3aed'], ['#0b1f4d', '#3b82f6'], ['#3a0d3a', '#db2777'], ['#062c3a', '#0891b2'], ['#2a1458', '#a855f7'], ['#10153f', '#6366f1']];
+  const ACC = ['#ff5fd2', '#22d3ee', '#34eba9', '#a855f7', '#f472b6'];
   function wrap(t, max) { const w = t.split(' '), out = []; let l = ''; w.forEach(x => { if ((l + ' ' + x).trim().length > max && l) { out.push(l); l = x; } else l = (l + ' ' + x).trim(); }); if (l) out.push(l); return out.slice(0, 3); }
   function frame(p, seed) {
     const [a, b] = TONES[seed % TONES.length], acc = ACC[seed % ACC.length];
@@ -261,7 +402,7 @@
       <rect width="400" height="500" fill="url(#${id})"/><circle cx="${320 - (seed * 37) % 140}" cy="120" r="120" fill="#fff" opacity=".08"/>
       <circle cx="${sx}" cy="170" r="48" fill="#f1e3d3" opacity=".92"/><path d="M${sx - 100} 500 C ${sx - 92} 262, ${sx + 92} 262, ${sx + 100} 500 Z" fill="${acc}" opacity=".9"/>
       <rect x="22" y="${boxY}" width="356" height="${boxH}" rx="14" fill="#fff" opacity=".95"/>
-      ${lines.map((l, i) => `<text x="40" y="${boxY + 36 + i * lh}" font-family="Bricolage Grotesque,Segoe UI,sans-serif" font-size="27" font-weight="700" fill="#1c2422">${esc(l)}</text>`).join('')}
+      ${lines.map((l, i) => `<text x="40" y="${boxY + 36 + i * lh}" font-family="Space Grotesk,Segoe UI,sans-serif" font-size="27" font-weight="700" fill="#1c2422">${esc(l)}</text>`).join('')}
     </svg>`;
   }
   const visual = (p, i) => p.thumb ? `<img src="${esc(p.thumb)}" alt="Prévia do post: ${esc(p.title)}" loading="lazy">` : frame(p, i);
