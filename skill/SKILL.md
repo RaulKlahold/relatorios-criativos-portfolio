@@ -67,8 +67,8 @@ Por conta, no período, **no nível de anúncio**:
 Se o conector não devolver `video_p50_watched_actions` (ou devolver com outro nome), não troque por outra métrica de vídeo: procure o campo equivalente a "reproduções de 50%" e, se não existir, deixe `vv50` vazio e registre a falta na metodologia.
 
 **Prévia do anúncio (frame do card).** Para cada peça que entra no relatório:
-1. Peça a prévia renderizada do anúncio (`/{ad_id}/previews` ou a ferramenta de prévia do MCP), no posicionamento principal em que ele rodou: `INSTAGRAM_STANDARD` (feed do Instagram) ou `MOBILE_FEED_STANDARD` (feed do Facebook). Na dúvida, use o posicionamento com mais impressões.
-2. Abra a prévia no navegador e faça a captura do anúncio inteiro, como o usuário vê: cabeçalho da página, mídia, texto principal e botão de CTA. Em vídeo, a captura mostra o primeiro frame dentro do layout do feed.
+1. Peça **sempre a prévia de feed** (`/{ad_id}/previews` ou a ferramenta de prévia do MCP): `INSTAGRAM_STANDARD` quando o anúncio rodou no Instagram, `MOBILE_FEED_STANDARD` nos demais casos. Vale mesmo para anúncio que rodou só em Stories ou Reels: no feed, a mídia sai em 1:1 ou 4:5 e a prévia tem altura previsível.
+2. Abra a prévia no navegador e capture só o bloco do anúncio, inteiro, sem corte: cabeçalho da página, mídia, início do texto e botão de CTA. Em vídeo, a captura mostra o primeiro frame dentro do layout do feed. O template exibe a captura num quadro de 2:3 sem recortar (`object-fit: contain`).
 3. Converta para JPEG de cerca de 600 px de largura e coloque em `thumb` como data URI.
 4. O `url` do card é o link do anúncio publicado: `instagram_permalink_url` quando rodou no Instagram, ou o post da página (`effective_object_story_id`) no Facebook.
 5. Sem link e sem prévia na plataforma, o anúncio não existe mais lá: não procure alternativa. Use `url: null` e `thumb: null` (o card mostra "Post não localizado") e registre na metodologia.
@@ -177,7 +177,7 @@ Cada criativo leva `name`, `format` (`VID`, `IMG` ou `CAR`), `url`, `thumb`, `ba
 
 ## B4. Preenchimento do JSON (modo B)
 
-Copie `relatorio-instagram-organico.html` para `{OUTPUT_DIR}/relatorio-instagram-organico.html` e substitua o bloco `report-data`. Os campos são `demo`, `author`, `brand`, `profile`, `followers`, `title`, `subtitle`, `monthLabel`, `start`, `end`, `collectedAt`, `topN`, `source`, `posts[]`, `learnings[]`, `reduce[]`, `test[]` e `mix[]`. Em `thumb`, use a captura do post como ele aparece no Instagram (abrir o `permalink` e capturar o post: cabeçalho do perfil, mídia e início da legenda), em JPEG de cerca de 600 px como data URI; nunca uma imagem genérica. Se o post exigir login e não abrir, use a mídia do post (`media_url`/`thumbnail_url`) e registre isso na metodologia.
+Copie `relatorio-instagram-organico.html` para `{OUTPUT_DIR}/relatorio-instagram-organico.html` e substitua o bloco `report-data`. Os campos são `demo`, `author`, `brand`, `profile`, `followers`, `title`, `subtitle`, `monthLabel`, `start`, `end`, `collectedAt`, `topN`, `source`, `posts[]`, `learnings[]`, `reduce[]`, `test[]` e `mix[]`. Em `thumb`, use a captura do post como ele aparece no feed do Instagram (abrir o `permalink` e capturar o post inteiro, sem corte: cabeçalho do perfil, mídia e início da legenda; o template mostra num quadro de 2:3), em JPEG de cerca de 600 px como data URI; nunca uma imagem genérica. Se o post exigir login e não abrir, use a mídia do post (`media_url`/`thumbnail_url`) e registre isso na metodologia.
 
 ---
 

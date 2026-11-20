@@ -330,6 +330,11 @@
   .result{align-items:stretch}
   .result strong,.result span{justify-content:space-between}
   @media print{.result strong small{color:inherit}.notes b{color:#4c1d95}}
+
+  /* Prévia de feed: quadro 2:3, captura inteira sem recorte */
+  .media,.pod .frame{aspect-ratio:2/3;background:#0b0a16}
+  .media img,.pod .frame img{object-fit:contain;object-position:center top}
+  .media .open{top:auto;bottom:12px}
 </style>
 </head>
 <body>
@@ -529,12 +534,24 @@
     const sx = 120 + (seed * 47) % 160;
     const person = `<circle cx="${sx}" cy="130" r="40" fill="#f1e3d3" opacity=".92"/><path d="M${sx - 84} 400 C ${sx - 78} 196, ${sx + 78} 196, ${sx + 84} 400 Z" fill="${accent}" opacity=".9"/>`;
         const text = lines.map((l, i) => `<text x="40" y="${boxY + 32 + i * lh}" font-family="Space Grotesk,Segoe UI,sans-serif" font-size="22" font-weight="700" fill="#1c2422">${esc(l)}</text>`).join('');
-    return `<svg viewBox="0 0 400 400" role="img" aria-label="Frame ilustrativo: ${esc(c.frameText || c.name)}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    const brand = esc(D.client), cap = esc((c.name.split('|').pop() || '').trim());
+    return `<svg viewBox="0 0 400 600" role="img" aria-label="Prévia ilustrativa de feed: ${esc(c.frameText || c.name)}" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
       <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${b}"/><stop offset="1" stop-color="${a}"/></linearGradient></defs>
-      <rect width="400" height="400" fill="url(#${id})"/>
-      <circle cx="${330 - (seed * 31) % 120}" cy="${90 + (seed * 23) % 60}" r="110" fill="#fff" opacity=".08"/>
-      ${person}
-      <rect x="22" y="${boxY}" width="356" height="${boxH}" rx="14" fill="#fff" opacity=".95"/>${text}
+      <rect width="400" height="600" fill="#fff"/>
+      <circle cx="78" cy="30" r="16" fill="${accent}"/>
+      <text x="102" y="27" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="700" fill="#111">${brand}</text>
+      <text x="102" y="45" font-family="Inter,Segoe UI,sans-serif" font-size="12" fill="#737373">Patrocinado</text>
+      <svg x="0" y="60" width="400" height="400" viewBox="0 0 400 400">
+        <rect width="400" height="400" fill="url(#${id})"/>
+        <circle cx="${330 - (seed * 31) % 120}" cy="${90 + (seed * 23) % 60}" r="110" fill="#fff" opacity=".08"/>
+        ${person}
+        <rect x="22" y="${boxY}" width="356" height="${boxH}" rx="14" fill="#fff" opacity=".95"/>${text}
+      </svg>
+      <rect x="0" y="460" width="400" height="46" fill="#f2f2f2"/>
+      <text x="16" y="489" font-family="Inter,Segoe UI,sans-serif" font-size="15" font-weight="600" fill="#111">Saiba mais</text>
+      <path d="M376 477 l8 7 -8 7" stroke="#111" stroke-width="2" fill="none"/>
+      <text x="16" y="534" font-family="Inter,Segoe UI,sans-serif" font-size="14" fill="#111"><tspan font-weight="700">${brand}</tspan> ${cap.length > 30 ? cap.slice(0, 30) + '…' : cap}</text>
+      <text x="16" y="556" font-family="Inter,Segoe UI,sans-serif" font-size="14" fill="#737373">... mais</text>
     </svg>`;
   }
 

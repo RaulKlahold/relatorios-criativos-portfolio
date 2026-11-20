@@ -301,6 +301,12 @@
   .result{align-items:stretch}
   .result strong,.result span{justify-content:space-between}
   @media print{.result strong small{color:inherit}.notes b{color:#4c1d95}}
+
+  /* Prévia de feed: quadro 2:3, captura inteira sem recorte */
+  .post .frame,.leader .frame{aspect-ratio:2/3;max-height:none;background:#0b0a16}
+  .leader .frame{max-height:460px}
+  .post .open{top:auto;bottom:12px}
+  .post .frame img,.leader .frame img{object-fit:contain;object-position:center top}
 </style>
 </head>
 <body>
@@ -436,12 +442,20 @@
     const [a, b] = TONES[seed % TONES.length], acc = ACC[seed % ACC.length];
     const lines = wrap(p.frameText || p.title, 18), lh = 32, boxH = lines.length * lh + 26, boxY = 476 - boxH;
     const id = 'o' + seed + Math.random().toString(36).slice(2, 6), sx = 130 + (seed * 53) % 140;
-    return `<svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Frame ilustrativo: ${esc(p.frameText || p.title)}" xmlns="http://www.w3.org/2000/svg">
+    const prof = esc(D.profile), cap = esc(p.title.length > 30 ? p.title.slice(0, 30) + '…' : p.title);
+    return `<svg viewBox="0 0 400 600" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Prévia ilustrativa de feed: ${esc(p.frameText || p.title)}" xmlns="http://www.w3.org/2000/svg">
+      <rect width="400" height="600" fill="#fff"/>
+      <circle cx="86" cy="25" r="14" fill="${acc}"/>
+      <text x="108" y="30" font-family="Inter,Segoe UI,sans-serif" font-size="14" font-weight="700" fill="#111">${prof}</text>
+      <path d="M0 52 h400" stroke="#eee"/>
+      <text x="16" y="574" font-family="Inter,Segoe UI,sans-serif" font-size="13" fill="#111"><tspan font-weight="700">${prof}</tspan> ${cap}</text>
+      <svg x="0" y="52" width="400" height="500" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
       <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${b}"/><stop offset="1" stop-color="${a}"/></linearGradient></defs>
       <rect width="400" height="500" fill="url(#${id})"/><circle cx="${320 - (seed * 37) % 140}" cy="120" r="120" fill="#fff" opacity=".08"/>
       <circle cx="${sx}" cy="170" r="48" fill="#f1e3d3" opacity=".92"/><path d="M${sx - 100} 500 C ${sx - 92} 262, ${sx + 92} 262, ${sx + 100} 500 Z" fill="${acc}" opacity=".9"/>
       <rect x="22" y="${boxY}" width="356" height="${boxH}" rx="14" fill="#fff" opacity=".95"/>
       ${lines.map((l, i) => `<text x="40" y="${boxY + 36 + i * lh}" font-family="Space Grotesk,Segoe UI,sans-serif" font-size="27" font-weight="700" fill="#1c2422">${esc(l)}</text>`).join('')}
+    </svg>
     </svg>`;
   }
   const visual = (p, i) => p.thumb ? `<img src="${esc(p.thumb)}" alt="Prévia do post: ${esc(p.title)}" loading="lazy">` : frame(p, i);
