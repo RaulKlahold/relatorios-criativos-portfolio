@@ -104,17 +104,20 @@ Em cada conta, escolha até 3 peças com eficiência abaixo dos pares **da mesma
 - topo e meio: menor taxa de VV50%;
 - fundo: maior custo por resultado.
 
-Peça com pouca entrega não é "pior", é inconclusiva: deixe de fora. Peça feita para um recorte específico (público pequeno, região, nicho) não se compara com peças amplas. Ela entra com `"kind": "context"`, recebe o selo `Contexto específico` e as notas `contexto`, `leitura` e `uso`, em vez de `sinal`, `motivo` e `evitar`.
+Peça com pouca entrega não é "pior", é inconclusiva: deixe de fora. Peça feita para um recorte específico (público pequeno, região, nicho) não se compara com peças amplas. Ela entra com `"kind": "context"`, recebe o selo `Contexto específico` e as notas `contexto` e `uso`, em vez de `porque` e `evitar`.
+
+Nas peças de alerta, o número já mostra o sinal: `porque` diz o possível motivo e `evitar` diz o padrão a não repetir.
 
 Feche a aba com 3 regras curtas (`rules` no JSON) que resumam o aprendizado do mês.
 
 ## A6. Texto de cada card
 
-Todo vencedor tem as três notas, com frases curtas e concretas:
+Menos texto: o card mostra o frame, o número principal e só duas notas. Cada nota é **uma frase de até ~70 caracteres**, sem repetir o que o frame ou os números já mostram.
 
-- **Leitura** (`leitura`): o que a peça comunica, para quem e com qual promessa.
-- **Hook** (`hook`): o que abre ou sustenta a atenção (fala, texto na tela, cena, pergunta, número, personagem).
-- **Próximo teste** (`teste`): uma variação produzível e mensurável. "Testar outro criativo" não serve; "abrir com a tela do app e manter o mesmo personagem e CTA" serve.
+- **Por que funcionou** (`porque`): o gancho ou a promessa que segurou a atenção. Ex.: "Número grande na tela antes de qualquer explicação."
+- **Próximo teste** (`teste`): uma variação produzível. "Testar outro criativo" não serve; "Corte de 20 segundos só com o painel do RH" serve.
+
+Na grade do card ficam só Investimento, Impressões e CTR. Selos (`badges`) só quando destacarem algo; etapa e formato já estão no nome do anúncio.
 
 ## A7. Preenchimento do JSON (modo A)
 
@@ -169,6 +172,7 @@ Cada criativo leva `name`, `format` (`VID`, `IMG` ou `CAR`), `url`, `thumb`, `ba
 - `learnings`: de 2 a 4 padrões observáveis nos posts do topo, cada um com um exemplo do ranking (pessoa com nome e história, bastidor real, dúvida concreta respondida, número ou prazo, prova social).
 - `reduce`: padrões a diminuir, não proibições (benefícios genéricos empilhados, marca antes da história, CTA repetido, muitos conceitos num post só).
 - `test`: hipóteses executáveis para o mês seguinte.
+- Texto curto: em `learnings`, `text` com até ~50 caracteres e `example` só com o post e a posição; `reduce` e `test` com 3 itens de até ~45 caracteres; `subtitle` em uma linha.
 - `mix`: distribuição editorial sugerida somando 100%. Inclua só quando houver base (pelo menos 8 posts). Sem base, deixe `"mix": []`, e a seção some.
 
 ## B4. Preenchimento do JSON (modo B)

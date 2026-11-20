@@ -4,7 +4,7 @@ Dois modelos de relatório HTML que uso no dia a dia de growth e mídia paga, ma
 
 | Arquivo | O que mostra |
 |---|---|
-| [`relatorio-criativos-meta.html`](relatorio-criativos-meta.html) | Retro de criativos do Meta Ads: os melhores anúncios por etapa do funil (topo, meio e fundo), métricas completas em cada card, leitura, hook e próximo teste, e uma aba com o que evitar no próximo ciclo. |
+| [`relatorio-criativos-meta.html`](relatorio-criativos-meta.html) | Retro de criativos do Meta Ads: os melhores anúncios por etapa do funil (topo, meio e fundo), cards enxutos com o número principal, por que funcionou e próximo teste, e uma aba com o que evitar no próximo ciclo. |
 | [`relatorio-instagram-organico.html`](relatorio-instagram-organico.html) | Top 5 do mês no Instagram orgânico, o que deu certo, o que reduzir, o que testar e uma distribuição editorial sugerida. |
 | [`skill/SKILL.md`](skill/SKILL.md) | Instruções para um agente de IA coletar os dados, preencher os modelos e validar o relatório antes da entrega. |
 

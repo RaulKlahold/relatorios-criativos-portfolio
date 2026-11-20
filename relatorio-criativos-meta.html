@@ -83,7 +83,7 @@
   .media .open{position:absolute;right:10px;top:12px;padding:6px 10px;border-radius:99px;background:rgb(255 255 255 / 94%);color:var(--ink);font-size:13px;font-weight:700;box-shadow:0 2px 10px rgb(0 0 0 / 18%)}
   .media.missing{display:grid;place-items:center;color:var(--ink-2);font-weight:600;cursor:default}
   .media .rank{position:absolute;left:10px;top:10px;display:grid;place-items:center;min-width:40px;height:40px;padding:0 8px;border-radius:12px;background:var(--surface);color:var(--c);font:800 20px var(--display)}
-  .ident{margin-top:14px;min-height:76px}
+  .ident{margin-top:14px;min-height:52px}
   .ident h4{margin:0;font:700 16px/1.3 var(--display);overflow-wrap:anywhere}
   .ident h4 a{text-decoration:none} .ident h4 a:hover{text-decoration:underline}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
@@ -377,7 +377,7 @@
     name, format (VID | IMG | CAR), url (link do post; null = "Post não localizado"),
     thumb (URL ou data URI do frame; null = frame ilustrativo gerado), frameText (texto do frame ilustrativo),
     badges [], spend, impressions, clicks, vv50 (topo/meio), results (fundo),
-    notes: {leitura, hook, teste} | {sinal, motivo, evitar} | {contexto, leitura, uso}
+    notes: {porque, teste} | {porque, evitar} | {contexto, uso}, uma frase curta cada (até ~70 caracteres)
 -->
 <script type="application/json" id="report-data">
 {
@@ -386,7 +386,7 @@
   "client": "Fôlego",
   "clientDescription": "app de treino e bem-estar",
   "title": "Retro de criativos",
-  "subtitle": "Quais anúncios mais seguraram atenção, quais geraram demanda e o que vale testar no próximo ciclo, etapa por etapa do funil.",
+  "subtitle": "O que segurou atenção, o que gerou demanda e o que testar a seguir.",
   "periodLabel": "setembro de 2026",
   "start": "2026-09-01",
   "end": "2026-09-30",
@@ -408,36 +408,36 @@
       "stages": {
         "topo": [
           {"name":"AD 04 | VID | TOPO | Pausa de 7 minutos no escritório","format":"VID","url":"#exemplo","thumb":null,"frameText":"Seu time para 7 minutos. A tarde inteira rende mais.","badges":["Maior volume"],"spend":3420.00,"impressions":612300,"clicks":2140,"vv50":84210,
-           "notes":{"leitura":"Mostra o benefício pelo ponto de vista do gestor: uma pausa curta que devolve energia ao time sem tirar ninguém do trabalho.","hook":"Cena real de escritório com o cronômetro de 7 minutos já no primeiro segundo.","teste":"Manter a abertura com o cronômetro e testar a mesma cena em operação de fábrica e call center."}},
+           "notes":{"porque": "Cronômetro de 7 minutos no primeiro segundo: o gestor entende a pausa na hora.", "teste": "Mesma cena em fábrica e call center."}},
           {"name":"AD 01 | VID | TOPO | O RH que mede tudo","format":"VID","url":"#exemplo","thumb":null,"frameText":"Você mede turnover. Mede a energia do time?","badges":["Melhor taxa"],"spend":1690.00,"impressions":268900,"clicks":1020,"vv50":41880,
-           "notes":{"leitura":"Provoca o RH com uma pergunta que ele não costuma responder e posiciona o app como indicador de bem-estar.","hook":"Pergunta direta em texto grande, sem marca nos primeiros segundos.","teste":"Trocar a pergunta por um dado do próprio setor do cliente e medir se a taxa de VV50% se mantém."}},
+           "notes":{"porque": "Pergunta direta ao RH, sem marca nos primeiros segundos.", "teste": "Trocar a pergunta por um dado do setor do cliente."}},
           {"name":"AD 07 | VID | TOPO | Escritório sem cadeira","format":"VID","url":"#exemplo","thumb":null,"frameText":"E se a reunião de hoje fosse em pé?","badges":[],"spend":980.00,"impressions":151200,"clicks":610,"vv50":18350,
-           "notes":{"leitura":"Usa uma situação curiosa do dia a dia corporativo para falar de movimento sem parecer palestra.","hook":"Cena inesperada de reunião em pé, com legenda em forma de pergunta.","teste":"Gravar uma versão com um gestor conhecido do setor fazendo o convite para a câmera."}}
+           "notes":{"porque": "Cena inesperada fala de movimento sem parecer palestra.", "teste": "Versão com um gestor do setor fazendo o convite."}}
         ],
         "meio": [
           {"name":"AD 02 | VID | MEIO | Case: 38% menos afastamentos","format":"VID","url":"#exemplo","thumb":null,"frameText":"38% menos afastamentos em 6 meses.","badges":["Prova concreta"],"spend":2310.00,"impressions":244800,"clicks":1880,"vv50":36940,
-           "notes":{"leitura":"Case com número, prazo e uma gestora de RH contando o que mudou na rotina da empresa.","hook":"Número grande na tela antes de qualquer explicação.","teste":"Fazer a mesma estrutura com outro indicador (absenteísmo ou NPS interno) e comparar retenção."}},
+           "notes":{"porque": "Número grande na tela antes de qualquer explicação.", "teste": "Mesma estrutura com absenteísmo ou NPS interno."}},
           {"name":"AD 05 | VID | MEIO | Como funciona em 40 segundos","format":"VID","url":"#exemplo","thumb":null,"frameText":"Como funciona, em 40 segundos.","badges":[],"spend":1460.00,"impressions":139600,"clicks":1240,"vv50":22470,
-           "notes":{"leitura":"Explicação de produto direta, com tela do painel do RH e do app do colaborador lado a lado.","hook":"Promessa de duração curta logo na abertura.","teste":"Cortar uma versão de 20 segundos focada só no painel do RH."}},
+           "notes":{"porque": "Promete ser curto e mostra o produto direto.", "teste": "Corte de 20 segundos só com o painel do RH."}},
           {"name":"AD 09 | VID | MEIO | O que o financeiro pergunta","format":"VID","url":"#exemplo","thumb":null,"frameText":"\"Quanto isso custa por pessoa?\"","badges":[],"spend":1020.00,"impressions":98300,"clicks":690,"vv50":12910,
-           "notes":{"leitura":"Antecipa a objeção de custo, que normalmente aparece só na reunião comercial.","hook":"A pergunta do financeiro dita em voz alta, como se fosse uma reunião real.","teste":"Responder com o custo por colaborador na tela e levar para um formulário curto."}}
+           "notes":{"porque": "Antecipa a objeção de custo que só viria na reunião.", "teste": "Mostrar o custo por colaborador na tela."}}
         ],
         "fundo": [
           {"name":"AD 03 | VID | FUNDO | Diagnóstico grátis do seu time","format":"VID","url":"#exemplo","thumb":null,"frameText":"Diagnóstico grátis de bem-estar do seu time.","badges":["Maior volume"],"spend":7640.00,"impressions":288400,"clicks":2310,"results":118,
-           "notes":{"leitura":"Oferta de baixo compromisso: o RH recebe um diagnóstico antes de falar de contrato.","hook":"A palavra \"grátis\" junto de \"seu time\" no primeiro frame.","teste":"Mostrar um trecho real do relatório de diagnóstico para aumentar a confiança antes do clique."}},
+           "notes":{"porque": "Baixo compromisso: diagnóstico antes de falar de contrato.", "teste": "Mostrar um trecho real do diagnóstico."}},
           {"name":"AD 06 | IMG | FUNDO | Planilha: custo do sedentarismo","format":"IMG","url":"#exemplo","thumb":null,"frameText":"Baixe a planilha: quanto o sedentarismo custa à sua empresa.","badges":["Melhor CPL"],"spend":4920.00,"impressions":176500,"clicks":1540,"results":74,
-           "notes":{"leitura":"Material útil por si só, que faz o RH calcular o problema antes de conhecer a solução.","hook":"Promessa de número personalizado: \"quanto custa à sua empresa\".","teste":"Testar a mesma oferta em formato de calculadora interativa na landing page."}},
+           "notes":{"porque": "Material útil que faz o RH calcular o próprio problema.", "teste": "Versão em calculadora interativa na landing page."}},
           {"name":"AD 11 | VID | FUNDO | Demo com especialista","format":"VID","url":"#exemplo","thumb":null,"frameText":"20 minutos com um especialista. Sem compromisso.","badges":[],"spend":3010.00,"impressions":92700,"clicks":720,"results":41,
-           "notes":{"leitura":"Convite direto para uma conversa, com rosto do especialista e duração clara.","hook":"Duração da conversa e \"sem compromisso\" reduzem a barreira de agendar.","teste":"Incluir a agenda de horários direto no formulário e medir taxa de agendamento."}}
+           "notes":{"porque": "Rosto do especialista e duração clara baixam a barreira.", "teste": "Agenda de horários direto no formulário."}}
         ]
       },
       "worst": [
         {"stage":"topo","kind":"alert","name":"AD 08 | VID | TOPO | Institucional Fôlego 2026","format":"VID","url":"#exemplo","thumb":null,"frameText":"Fôlego. Bem-estar que transforma.","badges":["Baixa retenção"],"spend":2180.00,"impressions":402600,"clicks":290,"vv50":1240,
-         "notes":{"sinal":"Teve muita entrega, mas só 0,31% das impressões chegaram à metade do vídeo.","motivo":"A abertura mostra logo e slogan antes de qualquer dor ou situação que o RH reconheça.","evitar":"Começar pelo institucional. Primeiro a situação do dia a dia, depois a marca."}},
+           "notes":{"porque": "Abre com logo e slogan, sem uma dor que o RH reconheça.", "evitar": "Começar pela marca. Primeiro a situação, depois a marca."}},
         {"stage":"meio","kind":"alert","name":"AD 10 | VID | MEIO | Depoimento genérico","format":"VID","url":"#exemplo","thumb":null,"frameText":"\"A Fôlego mudou nossa cultura.\"","badges":["Mensagem abstrata"],"spend":520.00,"impressions":38400,"clicks":96,"vv50":1030,
-         "notes":{"sinal":"Retenção baixa mesmo com mais de 38 mil impressões.","motivo":"\"Mudou nossa cultura\" é amplo demais; não há número, prazo nem exemplo concreto.","evitar":"Depoimento sem resultado verificável. Preferir problema, solução, número e prova visual."}},
+           "notes":{"porque": "\"Mudou nossa cultura\" sem número, prazo nem exemplo.", "evitar": "Depoimento sem resultado verificável."}},
         {"stage":"fundo","kind":"alert","name":"AD 12 | IMG | FUNDO | 6 benefícios + CTA","format":"IMG","url":"#exemplo","thumb":null,"frameText":"Saúde, energia, foco, clima, retenção e economia.","badges":["CPL elevado"],"spend":1140.00,"impressions":21300,"clicks":84,"results":6,
-         "notes":{"sinal":"Maior CPL entre as peças de fundo com investimento mínimo para comparação.","motivo":"Empilha seis benefícios sem desenvolver nenhum; o leitor não sabe qual é a promessa principal.","evitar":"Excesso de benefícios no mesmo anúncio. Uma promessa, uma prova e um próximo passo."}}
+           "notes":{"porque": "Seis benefícios e nenhuma promessa principal.", "evitar": "Mais de uma promessa no mesmo anúncio."}}
       ]
     },
     {
@@ -454,36 +454,36 @@
       "stages": {
         "topo": [
           {"name":"AD 01 | VID | TOPO | Treino que cabe no intervalo","format":"VID","url":"#exemplo","thumb":null,"frameText":"15 minutos. No intervalo do almoço.","badges":["Maior volume"],"spend":4980.00,"impressions":905700,"clicks":9120,"vv50":212400,
-           "notes":{"leitura":"Resolve a objeção de falta de tempo com um treino que acontece dentro da rotina de trabalho.","hook":"Relógio marcando 12h05 e a pessoa começando o treino ainda de roupa social.","teste":"Fazer versões com outros momentos do dia: antes do café, pós-expediente e com criança dormindo."}},
+           "notes":{"porque": "Resolve a falta de tempo com treino no intervalo do almoço.", "teste": "Outros momentos: antes do café e pós-expediente."}},
           {"name":"AD 03 | VID | TOPO | Eu odiava academia","format":"VID","url":"#exemplo","thumb":null,"frameText":"Eu odiava academia. Aí descobri isso.","badges":["Melhor taxa"],"spend":2050.00,"impressions":318400,"clicks":4010,"vv50":96310,
-           "notes":{"leitura":"Confissão em primeira pessoa que gera identificação com quem nunca gostou de treinar.","hook":"Frase de rejeição forte antes de apresentar a alternativa.","teste":"Repetir o formato com outras confissões: \"nunca tive disciplina\" e \"tenho vergonha de treinar\"."}},
+           "notes":{"porque": "Confissão em primeira pessoa gera identificação.", "teste": "Outras confissões, como \"nunca tive disciplina\"."}},
           {"name":"AD 05 | VID | TOPO | 3 erros de quem volta a treinar","format":"VID","url":"#exemplo","thumb":null,"frameText":"3 erros de quem volta a treinar.","badges":[],"spend":1470.00,"impressions":226900,"clicks":2680,"vv50":54880,
-           "notes":{"leitura":"Conteúdo educativo em lista, fácil de acompanhar até o fim.","hook":"Promessa numerada logo no início, que segura até o terceiro item.","teste":"Transformar cada erro em um vídeo próprio e ver qual tema puxa mais retenção."}}
+           "notes":{"porque": "Lista numerada segura até o terceiro item.", "teste": "Um vídeo por erro, para ver qual tema retém mais."}}
         ],
         "meio": [
           {"name":"AD 02 | VID | MEIO | Posso treinar com dor no joelho?","format":"VID","url":"#exemplo","thumb":null,"frameText":"Posso treinar com dor no joelho?","badges":["Maior volume"],"spend":3260.00,"impressions":402300,"clicks":6940,"vv50":148600,
-           "notes":{"leitura":"Responde uma dúvida real e frequente com uma fisioterapeuta, o que passa segurança.","hook":"A própria pergunta como abertura, dita por quem tem a dor.","teste":"Expandir para uma série de dúvidas: lombar, ombro, pós-parto e retorno após lesão."}},
+           "notes":{"porque": "Dúvida real respondida por fisioterapeuta passa segurança.", "teste": "Série de dúvidas: lombar, ombro e pós-parto."}},
           {"name":"AD 04 | VID | MEIO | Quanto tempo até ver resultado?","format":"VID","url":"#exemplo","thumb":null,"frameText":"Quanto tempo até ver resultado?","badges":[],"spend":1780.00,"impressions":211500,"clicks":3110,"vv50":61720,
-           "notes":{"leitura":"Ajusta expectativa com honestidade, falando em semanas e não em dias.","hook":"Pergunta que todo iniciante faz, sem promessa milagrosa.","teste":"Mostrar a linha do tempo de uma aluna real com marcos de 2, 4 e 8 semanas."}},
+           "notes":{"porque": "Expectativa honesta: fala em semanas, não em dias.", "teste": "Linha do tempo de uma aluna real (2, 4 e 8 semanas)."}},
           {"name":"AD 07 | VID | MEIO | Bastidores da gravação dos treinos","format":"VID","url":"#exemplo","thumb":null,"frameText":"Bastidores: como gravamos cada treino.","badges":[],"spend":1120.00,"impressions":129800,"clicks":1540,"vv50":27940,
-           "notes":{"leitura":"Mostra o cuidado por trás do produto e humaniza os instrutores.","hook":"Câmera de bastidor, com erro de gravação real nos primeiros segundos.","teste":"Fechar o bastidor com um convite para fazer o treino que estava sendo gravado."}}
+           "notes":{"porque": "Bastidor com erro real humaniza os instrutores.", "teste": "Fechar com convite para fazer o treino gravado."}}
         ],
         "fundo": [
           {"name":"AD 06 | VID | FUNDO | 7 dias grátis, sem cartão","format":"VID","url":"#exemplo","thumb":null,"frameText":"7 dias grátis. Sem cartão de crédito.","badges":["Maior volume"],"spend":7920.00,"impressions":612400,"clicks":11300,"results":1842,
-           "notes":{"leitura":"Oferta clara e sem risco: o principal medo (cobrança) é resolvido na própria frase.","hook":"\"Sem cartão\" em destaque, antes do nome do app.","teste":"Testar \"14 dias grátis\" contra \"7 dias\" e medir conversão em assinatura, não só cadastro."}},
+           "notes":{"porque": "\"Sem cartão\" resolve o medo de cobrança na própria frase.", "teste": "14 contra 7 dias, medindo assinatura e não só cadastro."}},
           {"name":"AD 09 | VID | FUNDO | Plano montado em 2 minutos","format":"VID","url":"#exemplo","thumb":null,"frameText":"Responda 5 perguntas. Seu plano fica pronto.","badges":[],"spend":6110.00,"impressions":498200,"clicks":8240,"results":1296,
-           "notes":{"leitura":"Mostra o onboarding do app como algo rápido e personalizado.","hook":"Tela do quiz aparecendo logo na abertura.","teste":"Levar o quiz para o anúncio (formato instantâneo) e comparar CPA com a landing page."}},
+           "notes":{"porque": "Mostra o onboarding como rápido e personalizado.", "teste": "Quiz em formulário instantâneo contra a landing page."}},
           {"name":"AD 11 | IMG | FUNDO | Antes e depois em 30 dias","format":"IMG","url":"#exemplo","thumb":null,"frameText":"30 dias de treino em casa. A rotina da Bia.","badges":[],"spend":4690.00,"impressions":371600,"clicks":6020,"results":904,
-           "notes":{"leitura":"Transformação de rotina, não de corpo: o foco é constância e disposição.","hook":"Rosto e nome da aluna, com o período de 30 dias bem visível.","teste":"Fazer carrossel com o diário dos 30 dias, um cartão por semana."}}
+           "notes":{"porque": "Transformação de rotina, não de corpo, com nome e prazo.", "teste": "Carrossel com o diário dos 30 dias."}}
         ]
       },
       "worst": [
         {"stage":"topo","kind":"alert","name":"AD 08 | VID | TOPO | Manifesto da marca","format":"VID","url":"#exemplo","thumb":null,"frameText":"Para todos que querem se mover.","badges":["Retenção abaixo dos pares"],"spend":1310.00,"impressions":186300,"clicks":640,"vv50":8940,
-         "notes":{"sinal":"Taxa de VV50% de 4,80%, bem abaixo das outras peças de topo com volume parecido.","motivo":"O manifesto demora para mostrar uma pessoa real e um benefício concreto.","evitar":"Guardar o benefício para o fim. Rotina real e ganho principal nos primeiros segundos."}},
+           "notes":{"porque": "Demora para mostrar uma pessoa real e um benefício.", "evitar": "Guardar o benefício para o fim do vídeo."}},
         {"stage":"fundo","kind":"context","name":"AD 12 | VID | FUNDO | Treino para gestantes","format":"VID","url":"#exemplo","thumb":null,"frameText":"Treino seguro na gestação, com fisioterapeuta.","badges":["Contexto específico"],"spend":2108.00,"impressions":141200,"clicks":1630,"results":214,
-         "notes":{"contexto":"Fala com um público bem menor (gestantes), então o custo por cadastro tende a ser maior.","leitura":"O CPA não deve ser comparado diretamente com os anúncios amplos; a diferença vem do recorte, não necessariamente do criativo.","uso":"Comparar com outras peças do mesmo recorte e acompanhar a conversão em assinatura desses cadastros."}},
+           "notes":{"contexto": "Público pequeno (gestantes): CPA maior é esperado.", "uso": "Comparar só com peças do mesmo recorte."}},
         {"stage":"fundo","kind":"context","name":"AD 13 | VID | FUNDO | Treino 60+","format":"VID","url":"#exemplo","thumb":null,"frameText":"Depois dos 60, força é independência.","badges":["Contexto específico"],"spend":1535.00,"impressions":118400,"clicks":1210,"results":176,
-         "notes":{"contexto":"Público 60+ é menor e mais caro de alcançar no Meta, o que pressiona o CPA.","leitura":"Custo acima dos amplos não prova criativo pior; vale olhar retenção dessas pessoas no app.","uso":"Manter como linha própria, com meta de CPA separada, e testar variações dentro do mesmo recorte."}}
+           "notes":{"contexto": "Público 60+ é menor e mais caro de alcançar.", "uso": "Meta de CPA própria e testes dentro do recorte."}}
       ]
     }
   ],
@@ -558,28 +558,23 @@
     const m = derive(c, stage);
     const isFundo = stage === 'fundo';
     const kindClass = mode === 'worst' ? (c.kind === 'context' ? ' is-context' : ' is-alert') : '';
-    const chips = [`<span class="chip">${STAGES[stage].label.replace(' de funil', '')}</span>`, `<span class="chip neutral">${c.format === 'VID' ? 'Vídeo' : c.format === 'CAR' ? 'Carrossel' : 'Imagem'}</span>`]
-      .concat((c.badges || []).map(b => `<span class="chip ${mode === 'worst' ? (c.kind === 'context' ? 'context' : 'alert') : 'neutral'}">${esc(b)}</span>`)).join('');
+    const chips = (c.badges || []).map(b => `<span class="chip ${mode === 'worst' ? (c.kind === 'context' ? 'context' : 'alert') : ''}">${esc(b)}</span>`).join('');
     const result = isFundo
       ? `<strong>${int(c.results)} <small>${c.results === 1 ? acc.resultSingular : acc.resultLabel}</small></strong><span>${acc.costLabel}<b>${money(m.cost)}</b></span>`
       : mode === 'worst'
         ? `<strong>${pct(m.vvRate)} <small>de VV50%</small></strong><span>${int(c.vv50)} views 50%<b>${money(m.costVV)} por view</b></span>`
         : `<strong>${compact(c.vv50)} <small>views 50%</small></strong><span>taxa de ${pct(m.vvRate)}<b>${money(m.costVV)} por view</b></span>`;
-    const rows = [
-      ['Investimento', money(c.spend)], ['Impressões', int(c.impressions)], ['Cliques no link', int(c.clicks)], ['CTR de link', pct(m.ctr)],
-      isFundo ? [cap(acc.resultLabel), int(c.results)] : ['Views 50%', int(c.vv50)],
-      isFundo ? [acc.costLabel, money(m.cost)] : ['Custo por VV50%', money(m.costVV)]
-    ];
+    const rows = [['Investimento', money(c.spend)], ['Impressões', compact(c.impressions)], ['CTR', pct(m.ctr)]];
     const n = c.notes || {};
     const notes = mode === 'worst'
       ? (c.kind === 'context'
-        ? [['Contexto', n.contexto], ['Leitura correta', n.leitura], ['Como usar', n.uso]]
-        : [['Sinal', n.sinal], ['Possível motivo', n.motivo], ['Evitar', n.evitar]])
-      : [['Leitura', n.leitura], ['Hook', n.hook], ['Próximo teste', n.teste]];
+        ? [['Contexto', n.contexto], ['Como usar', n.uso]]
+        : [['Por que não foi', n.porque], ['Evitar', n.evitar]])
+      : [['Por que funcionou', n.porque], ['Próximo teste', n.teste]];
     const title = c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener noreferrer">${esc(c.name)}</a>` : esc(c.name);
     return `<article class="card${kindClass}">
       ${media(c, mode === 'worst' ? null : i + 1, i + (acc.id === 'b2c' ? 3 : 0) + stage.length, stage)}
-      <div class="ident"><h4>${title}</h4><div class="chips">${chips}</div></div>
+      <div class="ident"><h4>${title}</h4>${chips ? `<div class="chips">${chips}</div>` : ''}</div>
       <div class="result">${result}</div>
       <dl class="metrics">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
       <ul class="notes">${notes.map(([k, v]) => `<li><b>${k}</b> ${esc(v || 'Sem informação suficiente para esta leitura.')}</li>`).join('')}</ul>
@@ -601,7 +596,7 @@
     const stages = Object.keys(STAGES).map(s => {
       const list = (acc.stages[s] || []);
       const body = list.length ? `<div class="cards">${list.map((c, i) => card(c, i, s, acc, 'win')).join('')}</div>` : `<p>Nenhum criativo classificado nesta etapa no período.</p>`;
-      const metric = s === 'fundo' ? `ranking por ${acc.resultLabel} (${esc(acc.conversionEvent)})` : 'ranking por views de 50% do vídeo';
+      const metric = s === 'fundo' ? `ranking por ${acc.resultLabel}` : 'ranking por views de 50%';
       return `<section class="stage ${s}" aria-labelledby="h-${acc.id}-${s}"><div class="stage-head"><h3 id="h-${acc.id}-${s}">${STAGES[s].label}</h3><p>${STAGES[s].desc}, ${metric}</p><span class="count">Top ${list.length}</span></div>${body}</section>`;
     }).join('');
     return `<section class="panel" id="panel-${acc.id}" role="tabpanel" aria-labelledby="tab-${acc.id}">
@@ -619,7 +614,7 @@
     }).join('');
     const rules = (D.rules || []).map(r => `<div class="rule"><strong>${esc(r.big)}</strong><span>${esc(r.small)}</span></div>`).join('');
     return `<section class="panel" id="panel-worst" role="tabpanel" aria-labelledby="tab-worst">
-      <div class="panel-head"><div><h2>O que evitar no próximo ciclo</h2><p>Só entram peças com entrega suficiente para comparar com outras da mesma etapa.</p></div></div>
+      <div class="panel-head"><div><h2>O que evitar no próximo ciclo</h2><p>Só peças com entrega suficiente para comparar.</p></div></div>
       ${groups}<div class="rules">${rules}</div>
     </section>`;
   }

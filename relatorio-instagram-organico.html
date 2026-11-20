@@ -324,18 +324,18 @@
   <dl class="kpis" id="kpis"></dl>
 
   <section class="block" aria-labelledby="top-title">
-    <div class="block-head"><div><h2 id="top-title"></h2><p>Posts publicados no período, ordenados por interações públicas (curtidas + comentários). Toque na prévia para abrir o post.</p></div></div>
+    <div class="block-head"><div><h2 id="top-title"></h2><p>Ordenados por curtidas + comentários.</p></div></div>
     <ol class="top5" id="top5"></ol>
     <p class="note" id="top-note"></p>
   </section>
 
   <section class="block" aria-labelledby="learn-title">
-    <div class="block-head"><div><h2 id="learn-title">O que deu certo</h2><p>Padrões que se repetem entre os posts com mais resposta. São hipóteses para orientar a pauta, não regras.</p></div></div>
+    <div class="block-head"><div><h2 id="learn-title">O que deu certo</h2><p>Padrões dos posts com mais resposta.</p></div></div>
     <div class="learn" id="learn"></div>
   </section>
 
   <section class="block" aria-labelledby="next-title">
-    <div class="block-head"><div><h2 id="next-title">Próximo mês</h2><p>O que diminuir e o que transformar em teste.</p></div></div>
+    <div class="block-head"><div><h2 id="next-title">Próximo mês</h2></div></div>
     <div class="compare">
       <article class="less"><h3>Reduzir</h3><ul id="reduce"></ul></article>
       <article class="more"><h3>Testar mais</h3><ul id="test"></ul></article>
@@ -343,7 +343,7 @@
   </section>
 
   <section class="block" aria-labelledby="mix-title" id="mix-block">
-    <div class="block-head"><div><h2 id="mix-title">Distribuição editorial sugerida</h2><p>Baseada no padrão de resposta observado no período, não em regra de algoritmo.</p></div></div>
+    <div class="block-head"><div><h2 id="mix-title">Distribuição editorial sugerida</h2><p>Com base na resposta do período.</p></div></div>
     <div class="mix-bar" id="mix-bar" role="img"></div>
     <ul class="mix-legend" id="mix-legend"></ul>
   </section>
@@ -369,7 +369,7 @@
   "profile": "folego.app",
   "followers": 48200,
   "title": "Instagram orgânico",
-  "subtitle": "O que o público mais respondeu no perfil durante o mês, o que isso sugere sobre a pauta e o que testar a seguir.",
+  "subtitle": "O que o público mais respondeu no mês e o que testar a seguir.",
   "monthLabel": "setembro",
   "start": "2026-09-01",
   "end": "2026-09-30",
@@ -388,24 +388,22 @@
     {"title":"Promoção: plano anual com desconto","date":"2026-09-25","format":"Foto","url":"#exemplo","thumb":null,"frameText":"Plano anual com desconto","likes":121,"comments":12}
   ],
   "learnings": [
-    {"title":"Gente real fazendo, não falando","text":"Bastidores e treino acontecendo tiveram mais resposta do que peças só com texto ou produto.","example":"Ex.: bastidores do treino de 7 minutos (1º lugar)."},
-    {"title":"Pessoa com nome e história","text":"Nome, idade e um antes e depois de rotina deixam a mensagem crível e geram comentários de identificação.","example":"Ex.: Lia, 52 anos (2º lugar)."},
-    {"title":"Dúvida concreta, resposta direta","text":"Perguntas que o público já faz puxaram a maior proporção de comentários sobre curtidas do mês.","example":"Ex.: dor no joelho (3º lugar, 78 comentários)."}
+    {"title":"Gente real fazendo, não falando","text":"Treino acontecendo rendeu mais que texto ou produto.","example":"Ex.: bastidores (1º lugar)."},
+    {"title":"Pessoa com nome e história","text":"Nome e idade deixam a mensagem crível.","example":"Ex.: Lia, 52 anos (2º lugar)."},
+    {"title":"Dúvida concreta, resposta direta","text":"Puxou a maior proporção de comentários.","example":"Ex.: dor no joelho (3º lugar)."}
   ],
   "reduce": [
-    "Listas de benefícios genéricos, sem pessoa nem situação.",
-    "Frases motivacionais soltas, sem ligação com o app.",
-    "Novidade de produto antes de mostrar o problema que ela resolve.",
-    "CTA de \"link na bio\" repetido em todos os posts."
+    "Listas de benefícios genéricos.",
+    "Frases motivacionais soltas.",
+    "Novidade de produto sem mostrar o problema."
   ],
   "test": [
-    "Série de dúvidas de dor e lesão, sempre com profissional respondendo.",
-    "Diário de alunos reais com prazo (semana 1, 2, 3, 4).",
-    "Bastidores de gravação com convite para fazer o treino junto.",
-    "CTA de conversa: \"qual parte do treino você mais trava?\""
+    "Série de dúvidas com fisioterapeuta.",
+    "Diário de alunos, semana a semana.",
+    "Bastidores com convite para treinar junto."
   ],
   "mix": [
-    {"pct":40,"label":"pessoas, histórias e prova social"},
+    {"pct":40,"label":"pessoas e histórias"},
     {"pct":30,"label":"dúvidas e educação"},
     {"pct":20,"label":"bastidores e rotina"},
     {"pct":10,"label":"produto e oferta direta"}
@@ -465,7 +463,7 @@
   if (lead) {
     if (lead.url) leader.href = lead.url; else leader.removeAttribute('href');
     leader.setAttribute('aria-label', `Post líder do mês: ${lead.title}`);
-    leader.innerHTML = `<div class="frame">${visual(lead, 0)}</div><p>Post com mais resposta em ${esc(D.monthLabel)}<strong>${int(lead.total)}</strong><b>${esc(lead.title)}</b></p>`;
+    leader.innerHTML = `<div class="frame">${visual(lead, 0)}</div><p>Post líder de ${esc(D.monthLabel)}<strong>${int(lead.total)}</strong><b>${esc(lead.title)}</b></p>`;
   }
 
   /* Indicadores */
@@ -481,12 +479,12 @@
   set('top5', top.map((p, i) => {
     const inner = `<div class="frame">${p.url ? visual(p, i) : '<span class="missing">Post não localizado</span>'}<span class="rank">${i + 1}</span>${p.url ? '<span class="open">Abrir post ↗</span>' : ''}</div>
       <h3>${esc(p.title)}</h3><p class="meta">${esc(p.format)}, ${short(p.date)}</p>
-      <div class="total"><strong>${int(p.total)}</strong><span>${int(p.likes)} curtidas e ${int(p.comments)} comentários</span></div>`;
+      <div class="total"><strong>${int(p.total)}</strong><span>${int(p.likes)} curtidas · ${int(p.comments)} coment.</span></div>`;
     return `<li>${p.url ? `<a class="post" href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir post ${i + 1}: ${esc(p.title)}">${inner}</a>` : `<div class="post">${inner}</div>`}</li>`;
   }).join(''));
   const shortage = top.length < (D.topN || 5) ? ` O período teve só ${top.length} posts, por isso o ranking tem menos de ${D.topN || 5} posições.` : '';
   document.getElementById('top-note').textContent = lead
-    ? `O primeiro lugar concentrou ${pct(lead.total / topSum * 100)} das interações do Top ${top.length}. Os ${top.length} posts do ranking somaram ${pct(topSum / inPeriod.reduce((s, p) => s + p.total, 0) * 100)} de toda a resposta pública do mês.${shortage}`
+    ? `O Top ${top.length} somou ${pct(topSum / inPeriod.reduce((s, p) => s + p.total, 0) * 100)} da resposta pública do mês.${shortage}`
     : 'Nenhum post publicado no período.';
 
   /* Leitura editorial */
